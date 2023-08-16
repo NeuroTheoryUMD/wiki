@@ -20,4 +20,4 @@
      	torch.cuda.is_available()
      	quit()
 6. Install dependencies
-	1. ```conda install -c conda-forge matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy optuna```
+	1. ```conda install -c conda-forge matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy optuna jupyter```

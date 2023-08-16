@@ -13,5 +13,10 @@
 4. Go to https://pytorch.org/get-started/locally/
 	1. For Linux, select Linux and Conda and the earliest CUDA version (currently is 11.7). 
 	2. Run the listed command in terminal.
-5. Install dependencies
+	3. Verify it is installed correctly by typing the following and it should print ```True```.
+    	```
+     	python
+        import torch
+     	torch.cuda.is_available()
+6. Install dependencies
 	1. ```conda install -c conda-forge matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy```

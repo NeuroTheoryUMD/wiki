@@ -20,4 +20,5 @@
      	torch.cuda.is_available()
      	quit()
 6. Install dependencies
-	1. ```conda install -c conda-forge matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy optuna jupyter```
+	1. For faster package finding, first install ```conda install conda-libmamba-solver```, then set it as your solver ```conda config --set solver libmamba```
+	2. ```conda install -c conda-forge matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy optuna jupyter```

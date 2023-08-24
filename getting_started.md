@@ -28,7 +28,7 @@
 
 ## Setup git permissions
 (https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?platform=linux)
-1. On the remote Linux machine, create a new ssh key with ```ssh keygen```. (Use the defaults, and don't worry about creating a passcode for this.) In the output, find the filename ending in ```*.pub```. This is your ssh public key. (By default, your key is named ```id_ed25519.pub```.
+1. On the remote Linux machine (or while you are ssh'd), create a new ssh key with ```ssh-keygen```. (Use the defaults, and don't worry about creating a passcode for this.) In the output, find the filename ending in ```*.pub```. This is your ssh public key. (By default, your key is named ```id_ed25519.pub```.
 2. Print out the key with ```cat ~/.ssh/id_ed25519.pub``` (or whichever name your key is named).
 3. Copy the entire output from terminal.
 4. On your GitHub page, go to Settings (click on the user picture at the top right and the menu option is near the bottom).

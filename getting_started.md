@@ -41,7 +41,11 @@
 11. If prompted, confirm access to your account on GitHub.
 
 ## Setup ssh tunnelto connect to the jupyter notebook remotely.
-2. On the remote Linux machine, start a jupyter server on power 4567 without opening a browser with ```jupyter notebook --no-browser --port=4567```.
-3. Setup an ssh tunnel from your client machine (laptop). In terminal, type ```ssh -N -L 4567:localhost:4567 <username>@<ip address>```. Replace ```<username>``` with your username and ```<ip address>``` with the ip address of the remote Linux host you are connecting to.
-4. Type in your password. If it succeeds, the comman will stay running in your terminal with no output. When you are ready to end the ssh tunnel, press Ctrl+C or just close the terminal window.
-5. Go to your jupyter notebook by opening a browser and going to URL ```localhost:4567```. On the first connection, it will prompt you for a password. Provide the one you setup with ```jupyter notebook password``` in the Install Packages section.
+1. Optional - If you want to keep your jupyter server running even when you close your remote connection:
+   	1. Open a new screen with the command ```screen```
+   	2. Re-activate your conda environment in the new terminal screen with ```conda activate torch```
+3. On the remote Linux machine, start a jupyter server on power 4567 without opening a browser with ```jupyter notebook --no-browser --port=4567```.
+   	1. If you ran this command on a new screen from step 1, return to your original screen with ```Ctrl-A``` followed by ```Ctrl-D```.
+5. Setup an ssh tunnel from your client machine (laptop). In terminal, type ```ssh -N -L 4567:localhost:4567 <username>@<ip address>```. Replace ```<username>``` with your username and ```<ip address>``` with the ip address of the remote Linux host you are connecting to.
+6. Type in your password. If it succeeds, the comman will stay running in your terminal with no output. When you are ready to end the ssh tunnel, press Ctrl+C or just close the terminal window.
+7. Go to your jupyter notebook by opening a browser and going to URL ```localhost:4567```. On the first connection, it will prompt you for a password. Provide the one you setup with ```jupyter notebook password``` in the Install Packages section.

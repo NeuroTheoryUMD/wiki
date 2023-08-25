@@ -23,7 +23,8 @@
      	quit()
 6. Install dependencies
 	1. For faster package finding, first install ```conda install conda-libmamba-solver```, then set it as your solver ```conda config --set solver libmamba```
-	2. ```conda install -c conda-forge matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy optuna jupyter```
+	2. ```conda install matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy jupyter```
+	3. (Optional: to install ```optuna``` for hyperparamter optimization, install it via the conda-forge channel ```conda install -c conda-forge optuna```.)
 7. Setup a password for jupyter notebook. Type ```jupyter notebook password```. Enter your desired password.
 
 ## Setup git permissions

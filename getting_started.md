@@ -41,7 +41,7 @@
 10. Click Add SSH key.
 11. If prompted, confirm access to your account on GitHub.
 
-## Setup ssh tunnelto connect to the jupyter notebook remotely.
+## Setup ssh tunnel to connect to the jupyter notebook remotely.
 1. Optional - If you want to keep your jupyter server running even when you close your remote connection:
    	1. Open a new screen with the command ```screen```
    	2. Re-activate your conda environment in the new terminal screen with ```conda activate torch```

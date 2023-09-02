@@ -22,7 +22,7 @@
      	torch.cuda.is_available()
      	quit()
 6. Install dependencies
-	1. ```conda install matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy jupyter skimage```
+	1. ```conda install matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy jupyter scikit-image```
  	2. (Optional: for faster package finding, install ```conda install conda-libmamba-solver```, then set it as your solver ```conda config --set solver libmamba```.)
 	3. (Optional: to install ```optuna``` for hyperparameter optimization, install it via the conda-forge channel ```conda install -c conda-forge optuna```.)
 7. Setup a password for jupyter notebook. Type ```jupyter notebook password```. Enter your desired password.

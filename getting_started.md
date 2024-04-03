@@ -41,7 +41,7 @@
 10. Click Add SSH key.
 11. If prompted, confirm access to your account on GitHub.
 
-## Setup ssh tunnel to connect to the jupyter notebook remotely.
+## Setup ssh tunnel to connect to the jupyter notebook remotely
 1. Optional - If you want to keep your jupyter server running even when you close your remote connection:
    	1. Open a new screen with the command ```screen```
    	2. Re-activate your conda environment in the new terminal screen with ```conda activate torch```
@@ -50,3 +50,8 @@
 5. Setup an ssh tunnel from your client machine (laptop). In terminal, type ```ssh -N -L 4567:localhost:4567 <username>@<ip address>```. Replace ```<username>``` with your username and ```<ip address>``` with the ip address of the remote Linux host you are connecting to.
 6. Type in your password. If it succeeds, the comman will stay running in your terminal with no output. When you are ready to end the ssh tunnel, press Ctrl+C or just close the terminal window.
 7. Go to your jupyter notebook by opening a browser and going to URL ```localhost:4567```. On the first connection, it will prompt you for a password. Provide the one you setup with ```jupyter notebook password``` in the Install Packages section.
+
+## Checkout the NeuroTheoryLab packages
+1. ```git clone git@github.com:NeuroTheoryUMD/ColorDataUtils.git```
+2. ```git clone git@github.com:NeuroTheoryUMD/NDNT.git```
+3. ```git clone git@github.com:NeuroTheoryUMD/NTdatasets.git```

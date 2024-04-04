@@ -5,3 +5,6 @@ This can include such things as:
 - documentation (incl. example notebooks)
 - code snippets
 - best practices and other SOPs used throughout the lab
+
+## Documentation
+[NDNT PyDoc](https://htmlpreview.github.io/?https://github.com/NeuroTheoryUMD/wiki/blob/main/docs/NDNT.html)

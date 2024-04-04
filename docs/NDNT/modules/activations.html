@@ -95,76 +95,89 @@
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
 </span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="k">def</span> <span class="nf">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xshift</span><span class="p">,</span> <span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>    <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">)</span> <span class="o">+</span> <span class="n">yshift</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">Square</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="sd">    Square activation function.</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>    
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">        Forward pass of the square activation function.</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="sd">        Parameters:</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="sd">        - x (torch.Tensor): input tensor</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="sd">        Returns:</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">        - torch.Tensor: output tensor</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a><span class="k">class</span> <span class="nc">AdaptiveELU</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="sd">    Exponential Linear Unit shifted by user specified values.</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="sd">    This helps to ensure the output to stay positive.</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xshift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">yshift</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="sd">        Initialize the AdaptiveELU activation function.</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a>
-</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="sd">        Parameters:</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a><span class="sd">        - xshift (float): shift in x direction</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a><span class="sd">        - yshift (float): shift in y direction</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="sd">        - inplace (bool): whether to modify the input tensor in place</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="sd">        - **kwargs: additional keyword arguments</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a>
-</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="sd">        Returns:</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="sd">        - None</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>        <span class="nb">super</span><span class="p">(</span><span class="n">AdaptiveELU</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a>
-</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span> <span class="o">=</span> <span class="n">xshift</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span> <span class="o">=</span> <span class="n">yshift</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a>
-</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">        Forward pass of the AdaptiveELU activation function.</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="k">def</span> <span class="nf">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xshift</span><span class="p">,</span> <span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">    Exponential Linear Unit shifted by user specified values.</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">    Args:</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="sd">        x (torch.Tensor): input tensor</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">        xshift (float): shift in x direction</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">        yshift (float): shift in y direction</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="sd">        inplace (bool): whether to modify the input tensor in place</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">    Returns:</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">        torch.Tensor: output tensor</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">)</span> <span class="o">+</span> <span class="n">yshift</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a><span class="k">class</span> <span class="nc">Square</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a><span class="sd">    Square activation function.</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="sd">        Forward pass of the square activation function.</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>
+</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a><span class="sd">        Args:</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a><span class="sd">            x (torch.Tensor): input tensor</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>
+</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a><span class="sd">        Returns:</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="sd">            torch.Tensor: output tensor</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos">39</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos">40</span></a>        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos">41</span></a>
+</span><span id="L-42"><a href="#L-42"><span class="linenos">42</span></a><span class="k">class</span> <span class="nc">AdaptiveELU</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos">43</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos">44</span></a><span class="sd">    Exponential Linear Unit shifted by user specified values.</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos">45</span></a><span class="sd">    This helps to ensure the output to stay positive.</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos">46</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos">47</span></a>
+</span><span id="L-48"><a href="#L-48"><span class="linenos">48</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xshift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">yshift</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos">49</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos">50</span></a><span class="sd">        Initialize the AdaptiveELU activation function.</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos">51</span></a>
+</span><span id="L-52"><a href="#L-52"><span class="linenos">52</span></a><span class="sd">        Args:</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos">53</span></a><span class="sd">            xshift (float): shift in x direction</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos">54</span></a><span class="sd">            yshift (float): shift in y direction</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos">55</span></a><span class="sd">            inplace (bool): whether to modify the input tensor in place</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos">56</span></a><span class="sd">            **kwargs: additional keyword arguments</span>
 </span><span id="L-57"><a href="#L-57"><span class="linenos">57</span></a>
-</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a><span class="sd">        Parameters:</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="sd">        - x (torch.Tensor): input tensor</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a>
-</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a><span class="sd">        Returns:</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a><span class="sd">        - torch.Tensor: output tensor</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>        <span class="k">return</span> <span class="n">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>
-</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a><span class="n">NLtypes</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>    <span class="s1">&#39;lin&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a>    <span class="s1">&#39;relu&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a>    <span class="s1">&#39;elu&#39;</span><span class="p">:</span> <span class="n">AdaptiveELU</span><span class="p">(),</span>
-</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>    <span class="s1">&#39;square&#39;</span><span class="p">:</span> <span class="n">Square</span><span class="p">(),</span>
-</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a>    <span class="s1">&#39;softplus&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Softplus</span><span class="p">(),</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a>    <span class="s1">&#39;tanh&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>    <span class="s1">&#39;sigmoid&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>
-</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a>    <span class="s1">&#39;gelu&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">GELU</span><span class="p">()</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a>    <span class="p">}</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos">58</span></a><span class="sd">        Returns:</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos">59</span></a><span class="sd">            None</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos">60</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos">61</span></a>        <span class="nb">super</span><span class="p">(</span><span class="n">AdaptiveELU</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos">62</span></a>
+</span><span id="L-63"><a href="#L-63"><span class="linenos">63</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span> <span class="o">=</span> <span class="n">xshift</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos">64</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span> <span class="o">=</span> <span class="n">yshift</span>
+</span><span id="L-65"><a href="#L-65"><span class="linenos">65</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos">66</span></a>
+</span><span id="L-67"><a href="#L-67"><span class="linenos">67</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos">68</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos">69</span></a><span class="sd">        Forward pass of the AdaptiveELU activation function.</span>
+</span><span id="L-70"><a href="#L-70"><span class="linenos">70</span></a>
+</span><span id="L-71"><a href="#L-71"><span class="linenos">71</span></a><span class="sd">        Args:</span>
+</span><span id="L-72"><a href="#L-72"><span class="linenos">72</span></a><span class="sd">            x (torch.Tensor): input tensor</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos">73</span></a>
+</span><span id="L-74"><a href="#L-74"><span class="linenos">74</span></a><span class="sd">        Returns:</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos">75</span></a><span class="sd">            torch.Tensor: output tensor</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos">76</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos">77</span></a>        <span class="k">return</span> <span class="n">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos">78</span></a>
+</span><span id="L-79"><a href="#L-79"><span class="linenos">79</span></a><span class="n">NLtypes</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos">80</span></a>    <span class="s1">&#39;lin&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos">81</span></a>    <span class="s1">&#39;relu&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos">82</span></a>    <span class="s1">&#39;elu&#39;</span><span class="p">:</span> <span class="n">AdaptiveELU</span><span class="p">(),</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos">83</span></a>    <span class="s1">&#39;square&#39;</span><span class="p">:</span> <span class="n">Square</span><span class="p">(),</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos">84</span></a>    <span class="s1">&#39;softplus&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Softplus</span><span class="p">(),</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos">85</span></a>    <span class="s1">&#39;tanh&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Tanh</span><span class="p">(),</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos">86</span></a>    <span class="s1">&#39;sigmoid&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos">87</span></a>    <span class="s1">&#39;gelu&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">GELU</span><span class="p">()</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos">88</span></a>    <span class="p">}</span>
 </span></pre></div>
 
 
@@ -180,12 +193,41 @@
 
     </div>
     <a class="headerlink" href="#adaptive_elu"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="adaptive_elu-8"><a href="#adaptive_elu-8"><span class="linenos">8</span></a><span class="k">def</span> <span class="nf">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xshift</span><span class="p">,</span> <span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="adaptive_elu-9"><a href="#adaptive_elu-9"><span class="linenos">9</span></a>    <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">xshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">)</span> <span class="o">+</span> <span class="n">yshift</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="adaptive_elu-8"><a href="#adaptive_elu-8"><span class="linenos"> 8</span></a><span class="k">def</span> <span class="nf">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xshift</span><span class="p">,</span> <span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span><span id="adaptive_elu-9"><a href="#adaptive_elu-9"><span class="linenos"> 9</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="adaptive_elu-10"><a href="#adaptive_elu-10"><span class="linenos">10</span></a><span class="sd">    Exponential Linear Unit shifted by user specified values.</span>
+</span><span id="adaptive_elu-11"><a href="#adaptive_elu-11"><span class="linenos">11</span></a>
+</span><span id="adaptive_elu-12"><a href="#adaptive_elu-12"><span class="linenos">12</span></a><span class="sd">    Args:</span>
+</span><span id="adaptive_elu-13"><a href="#adaptive_elu-13"><span class="linenos">13</span></a><span class="sd">        x (torch.Tensor): input tensor</span>
+</span><span id="adaptive_elu-14"><a href="#adaptive_elu-14"><span class="linenos">14</span></a><span class="sd">        xshift (float): shift in x direction</span>
+</span><span id="adaptive_elu-15"><a href="#adaptive_elu-15"><span class="linenos">15</span></a><span class="sd">        yshift (float): shift in y direction</span>
+</span><span id="adaptive_elu-16"><a href="#adaptive_elu-16"><span class="linenos">16</span></a><span class="sd">        inplace (bool): whether to modify the input tensor in place</span>
+</span><span id="adaptive_elu-17"><a href="#adaptive_elu-17"><span class="linenos">17</span></a>
+</span><span id="adaptive_elu-18"><a href="#adaptive_elu-18"><span class="linenos">18</span></a><span class="sd">    Returns:</span>
+</span><span id="adaptive_elu-19"><a href="#adaptive_elu-19"><span class="linenos">19</span></a><span class="sd">        torch.Tensor: output tensor</span>
+</span><span id="adaptive_elu-20"><a href="#adaptive_elu-20"><span class="linenos">20</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="adaptive_elu-21"><a href="#adaptive_elu-21"><span class="linenos">21</span></a>    <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">inplace</span><span class="p">)</span> <span class="o">+</span> <span class="n">yshift</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Exponential Linear Unit shifted by user specified values.</p>
+
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>x (torch.Tensor):</strong>  input tensor</li>
+<li><strong>xshift (float):</strong>  shift in x direction</li>
+<li><strong>yshift (float):</strong>  shift in y direction</li>
+<li><strong>inplace (bool):</strong>  whether to modify the input tensor in place</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>torch.Tensor: output tensor</p>
+</blockquote>
+</div>
+
 
                 </section>
                 <section id="Square">
@@ -199,24 +241,24 @@
 
     </div>
     <a class="headerlink" href="#Square"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Square-12"><a href="#Square-12"><span class="linenos">12</span></a><span class="k">class</span> <span class="nc">Square</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-</span><span id="Square-13"><a href="#Square-13"><span class="linenos">13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Square-14"><a href="#Square-14"><span class="linenos">14</span></a><span class="sd">    Square activation function.</span>
-</span><span id="Square-15"><a href="#Square-15"><span class="linenos">15</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="Square-16"><a href="#Square-16"><span class="linenos">16</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Square-17"><a href="#Square-17"><span class="linenos">17</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="Square-18"><a href="#Square-18"><span class="linenos">18</span></a>    
-</span><span id="Square-19"><a href="#Square-19"><span class="linenos">19</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-</span><span id="Square-20"><a href="#Square-20"><span class="linenos">20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Square-21"><a href="#Square-21"><span class="linenos">21</span></a><span class="sd">        Forward pass of the square activation function.</span>
-</span><span id="Square-22"><a href="#Square-22"><span class="linenos">22</span></a>
-</span><span id="Square-23"><a href="#Square-23"><span class="linenos">23</span></a><span class="sd">        Parameters:</span>
-</span><span id="Square-24"><a href="#Square-24"><span class="linenos">24</span></a><span class="sd">        - x (torch.Tensor): input tensor</span>
-</span><span id="Square-25"><a href="#Square-25"><span class="linenos">25</span></a>
-</span><span id="Square-26"><a href="#Square-26"><span class="linenos">26</span></a><span class="sd">        Returns:</span>
-</span><span id="Square-27"><a href="#Square-27"><span class="linenos">27</span></a><span class="sd">        - torch.Tensor: output tensor</span>
-</span><span id="Square-28"><a href="#Square-28"><span class="linenos">28</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Square-29"><a href="#Square-29"><span class="linenos">29</span></a>        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Square-24"><a href="#Square-24"><span class="linenos">24</span></a><span class="k">class</span> <span class="nc">Square</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="Square-25"><a href="#Square-25"><span class="linenos">25</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Square-26"><a href="#Square-26"><span class="linenos">26</span></a><span class="sd">    Square activation function.</span>
+</span><span id="Square-27"><a href="#Square-27"><span class="linenos">27</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="Square-28"><a href="#Square-28"><span class="linenos">28</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Square-29"><a href="#Square-29"><span class="linenos">29</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span><span id="Square-30"><a href="#Square-30"><span class="linenos">30</span></a>    
+</span><span id="Square-31"><a href="#Square-31"><span class="linenos">31</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="Square-32"><a href="#Square-32"><span class="linenos">32</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Square-33"><a href="#Square-33"><span class="linenos">33</span></a><span class="sd">        Forward pass of the square activation function.</span>
+</span><span id="Square-34"><a href="#Square-34"><span class="linenos">34</span></a>
+</span><span id="Square-35"><a href="#Square-35"><span class="linenos">35</span></a><span class="sd">        Args:</span>
+</span><span id="Square-36"><a href="#Square-36"><span class="linenos">36</span></a><span class="sd">            x (torch.Tensor): input tensor</span>
+</span><span id="Square-37"><a href="#Square-37"><span class="linenos">37</span></a>
+</span><span id="Square-38"><a href="#Square-38"><span class="linenos">38</span></a><span class="sd">        Returns:</span>
+</span><span id="Square-39"><a href="#Square-39"><span class="linenos">39</span></a><span class="sd">            torch.Tensor: output tensor</span>
+</span><span id="Square-40"><a href="#Square-40"><span class="linenos">40</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Square-41"><a href="#Square-41"><span class="linenos">41</span></a>        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 </span></pre></div>
 
 
@@ -234,8 +276,8 @@
 
     </div>
     <a class="headerlink" href="#Square.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Square.__init__-16"><a href="#Square.__init__-16"><span class="linenos">16</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="Square.__init__-17"><a href="#Square.__init__-17"><span class="linenos">17</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Square.__init__-28"><a href="#Square.__init__-28"><span class="linenos">28</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="Square.__init__-29"><a href="#Square.__init__-29"><span class="linenos">29</span></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 </span></pre></div>
 
 
@@ -255,33 +297,33 @@
 
     </div>
     <a class="headerlink" href="#Square.forward"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Square.forward-19"><a href="#Square.forward-19"><span class="linenos">19</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-</span><span id="Square.forward-20"><a href="#Square.forward-20"><span class="linenos">20</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Square.forward-21"><a href="#Square.forward-21"><span class="linenos">21</span></a><span class="sd">        Forward pass of the square activation function.</span>
-</span><span id="Square.forward-22"><a href="#Square.forward-22"><span class="linenos">22</span></a>
-</span><span id="Square.forward-23"><a href="#Square.forward-23"><span class="linenos">23</span></a><span class="sd">        Parameters:</span>
-</span><span id="Square.forward-24"><a href="#Square.forward-24"><span class="linenos">24</span></a><span class="sd">        - x (torch.Tensor): input tensor</span>
-</span><span id="Square.forward-25"><a href="#Square.forward-25"><span class="linenos">25</span></a>
-</span><span id="Square.forward-26"><a href="#Square.forward-26"><span class="linenos">26</span></a><span class="sd">        Returns:</span>
-</span><span id="Square.forward-27"><a href="#Square.forward-27"><span class="linenos">27</span></a><span class="sd">        - torch.Tensor: output tensor</span>
-</span><span id="Square.forward-28"><a href="#Square.forward-28"><span class="linenos">28</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="Square.forward-29"><a href="#Square.forward-29"><span class="linenos">29</span></a>        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Square.forward-31"><a href="#Square.forward-31"><span class="linenos">31</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="Square.forward-32"><a href="#Square.forward-32"><span class="linenos">32</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Square.forward-33"><a href="#Square.forward-33"><span class="linenos">33</span></a><span class="sd">        Forward pass of the square activation function.</span>
+</span><span id="Square.forward-34"><a href="#Square.forward-34"><span class="linenos">34</span></a>
+</span><span id="Square.forward-35"><a href="#Square.forward-35"><span class="linenos">35</span></a><span class="sd">        Args:</span>
+</span><span id="Square.forward-36"><a href="#Square.forward-36"><span class="linenos">36</span></a><span class="sd">            x (torch.Tensor): input tensor</span>
+</span><span id="Square.forward-37"><a href="#Square.forward-37"><span class="linenos">37</span></a>
+</span><span id="Square.forward-38"><a href="#Square.forward-38"><span class="linenos">38</span></a><span class="sd">        Returns:</span>
+</span><span id="Square.forward-39"><a href="#Square.forward-39"><span class="linenos">39</span></a><span class="sd">            torch.Tensor: output tensor</span>
+</span><span id="Square.forward-40"><a href="#Square.forward-40"><span class="linenos">40</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="Square.forward-41"><a href="#Square.forward-41"><span class="linenos">41</span></a>        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Forward pass of the square activation function.</p>
 
-<p>Parameters:</p>
+<h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li>x (torch.Tensor): input tensor</li>
+<li><strong>x (torch.Tensor):</strong>  input tensor</li>
 </ul>
 
-<p>Returns:</p>
+<h6 id="returns">Returns:</h6>
 
-<ul>
-<li>torch.Tensor: output tensor</li>
-</ul>
+<blockquote>
+  <p>torch.Tensor: output tensor</p>
+</blockquote>
 </div>
 
 
@@ -353,42 +395,42 @@
 
     </div>
     <a class="headerlink" href="#AdaptiveELU"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="AdaptiveELU-31"><a href="#AdaptiveELU-31"><span class="linenos">31</span></a><span class="k">class</span> <span class="nc">AdaptiveELU</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-</span><span id="AdaptiveELU-32"><a href="#AdaptiveELU-32"><span class="linenos">32</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU-33"><a href="#AdaptiveELU-33"><span class="linenos">33</span></a><span class="sd">    Exponential Linear Unit shifted by user specified values.</span>
-</span><span id="AdaptiveELU-34"><a href="#AdaptiveELU-34"><span class="linenos">34</span></a><span class="sd">    This helps to ensure the output to stay positive.</span>
-</span><span id="AdaptiveELU-35"><a href="#AdaptiveELU-35"><span class="linenos">35</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU-36"><a href="#AdaptiveELU-36"><span class="linenos">36</span></a>
-</span><span id="AdaptiveELU-37"><a href="#AdaptiveELU-37"><span class="linenos">37</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xshift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">yshift</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="AdaptiveELU-38"><a href="#AdaptiveELU-38"><span class="linenos">38</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU-39"><a href="#AdaptiveELU-39"><span class="linenos">39</span></a><span class="sd">        Initialize the AdaptiveELU activation function.</span>
-</span><span id="AdaptiveELU-40"><a href="#AdaptiveELU-40"><span class="linenos">40</span></a>
-</span><span id="AdaptiveELU-41"><a href="#AdaptiveELU-41"><span class="linenos">41</span></a><span class="sd">        Parameters:</span>
-</span><span id="AdaptiveELU-42"><a href="#AdaptiveELU-42"><span class="linenos">42</span></a><span class="sd">        - xshift (float): shift in x direction</span>
-</span><span id="AdaptiveELU-43"><a href="#AdaptiveELU-43"><span class="linenos">43</span></a><span class="sd">        - yshift (float): shift in y direction</span>
-</span><span id="AdaptiveELU-44"><a href="#AdaptiveELU-44"><span class="linenos">44</span></a><span class="sd">        - inplace (bool): whether to modify the input tensor in place</span>
-</span><span id="AdaptiveELU-45"><a href="#AdaptiveELU-45"><span class="linenos">45</span></a><span class="sd">        - **kwargs: additional keyword arguments</span>
-</span><span id="AdaptiveELU-46"><a href="#AdaptiveELU-46"><span class="linenos">46</span></a>
-</span><span id="AdaptiveELU-47"><a href="#AdaptiveELU-47"><span class="linenos">47</span></a><span class="sd">        Returns:</span>
-</span><span id="AdaptiveELU-48"><a href="#AdaptiveELU-48"><span class="linenos">48</span></a><span class="sd">        - None</span>
-</span><span id="AdaptiveELU-49"><a href="#AdaptiveELU-49"><span class="linenos">49</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU-50"><a href="#AdaptiveELU-50"><span class="linenos">50</span></a>        <span class="nb">super</span><span class="p">(</span><span class="n">AdaptiveELU</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="AdaptiveELU-51"><a href="#AdaptiveELU-51"><span class="linenos">51</span></a>
-</span><span id="AdaptiveELU-52"><a href="#AdaptiveELU-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span> <span class="o">=</span> <span class="n">xshift</span>
-</span><span id="AdaptiveELU-53"><a href="#AdaptiveELU-53"><span class="linenos">53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span> <span class="o">=</span> <span class="n">yshift</span>
-</span><span id="AdaptiveELU-54"><a href="#AdaptiveELU-54"><span class="linenos">54</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
-</span><span id="AdaptiveELU-55"><a href="#AdaptiveELU-55"><span class="linenos">55</span></a>
-</span><span id="AdaptiveELU-56"><a href="#AdaptiveELU-56"><span class="linenos">56</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-</span><span id="AdaptiveELU-57"><a href="#AdaptiveELU-57"><span class="linenos">57</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU-58"><a href="#AdaptiveELU-58"><span class="linenos">58</span></a><span class="sd">        Forward pass of the AdaptiveELU activation function.</span>
-</span><span id="AdaptiveELU-59"><a href="#AdaptiveELU-59"><span class="linenos">59</span></a>
-</span><span id="AdaptiveELU-60"><a href="#AdaptiveELU-60"><span class="linenos">60</span></a><span class="sd">        Parameters:</span>
-</span><span id="AdaptiveELU-61"><a href="#AdaptiveELU-61"><span class="linenos">61</span></a><span class="sd">        - x (torch.Tensor): input tensor</span>
-</span><span id="AdaptiveELU-62"><a href="#AdaptiveELU-62"><span class="linenos">62</span></a>
-</span><span id="AdaptiveELU-63"><a href="#AdaptiveELU-63"><span class="linenos">63</span></a><span class="sd">        Returns:</span>
-</span><span id="AdaptiveELU-64"><a href="#AdaptiveELU-64"><span class="linenos">64</span></a><span class="sd">        - torch.Tensor: output tensor</span>
-</span><span id="AdaptiveELU-65"><a href="#AdaptiveELU-65"><span class="linenos">65</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU-66"><a href="#AdaptiveELU-66"><span class="linenos">66</span></a>        <span class="k">return</span> <span class="n">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="AdaptiveELU-43"><a href="#AdaptiveELU-43"><span class="linenos">43</span></a><span class="k">class</span> <span class="nc">AdaptiveELU</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span><span id="AdaptiveELU-44"><a href="#AdaptiveELU-44"><span class="linenos">44</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU-45"><a href="#AdaptiveELU-45"><span class="linenos">45</span></a><span class="sd">    Exponential Linear Unit shifted by user specified values.</span>
+</span><span id="AdaptiveELU-46"><a href="#AdaptiveELU-46"><span class="linenos">46</span></a><span class="sd">    This helps to ensure the output to stay positive.</span>
+</span><span id="AdaptiveELU-47"><a href="#AdaptiveELU-47"><span class="linenos">47</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU-48"><a href="#AdaptiveELU-48"><span class="linenos">48</span></a>
+</span><span id="AdaptiveELU-49"><a href="#AdaptiveELU-49"><span class="linenos">49</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xshift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">yshift</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="AdaptiveELU-50"><a href="#AdaptiveELU-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU-51"><a href="#AdaptiveELU-51"><span class="linenos">51</span></a><span class="sd">        Initialize the AdaptiveELU activation function.</span>
+</span><span id="AdaptiveELU-52"><a href="#AdaptiveELU-52"><span class="linenos">52</span></a>
+</span><span id="AdaptiveELU-53"><a href="#AdaptiveELU-53"><span class="linenos">53</span></a><span class="sd">        Args:</span>
+</span><span id="AdaptiveELU-54"><a href="#AdaptiveELU-54"><span class="linenos">54</span></a><span class="sd">            xshift (float): shift in x direction</span>
+</span><span id="AdaptiveELU-55"><a href="#AdaptiveELU-55"><span class="linenos">55</span></a><span class="sd">            yshift (float): shift in y direction</span>
+</span><span id="AdaptiveELU-56"><a href="#AdaptiveELU-56"><span class="linenos">56</span></a><span class="sd">            inplace (bool): whether to modify the input tensor in place</span>
+</span><span id="AdaptiveELU-57"><a href="#AdaptiveELU-57"><span class="linenos">57</span></a><span class="sd">            **kwargs: additional keyword arguments</span>
+</span><span id="AdaptiveELU-58"><a href="#AdaptiveELU-58"><span class="linenos">58</span></a>
+</span><span id="AdaptiveELU-59"><a href="#AdaptiveELU-59"><span class="linenos">59</span></a><span class="sd">        Returns:</span>
+</span><span id="AdaptiveELU-60"><a href="#AdaptiveELU-60"><span class="linenos">60</span></a><span class="sd">            None</span>
+</span><span id="AdaptiveELU-61"><a href="#AdaptiveELU-61"><span class="linenos">61</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU-62"><a href="#AdaptiveELU-62"><span class="linenos">62</span></a>        <span class="nb">super</span><span class="p">(</span><span class="n">AdaptiveELU</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="AdaptiveELU-63"><a href="#AdaptiveELU-63"><span class="linenos">63</span></a>
+</span><span id="AdaptiveELU-64"><a href="#AdaptiveELU-64"><span class="linenos">64</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span> <span class="o">=</span> <span class="n">xshift</span>
+</span><span id="AdaptiveELU-65"><a href="#AdaptiveELU-65"><span class="linenos">65</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span> <span class="o">=</span> <span class="n">yshift</span>
+</span><span id="AdaptiveELU-66"><a href="#AdaptiveELU-66"><span class="linenos">66</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
+</span><span id="AdaptiveELU-67"><a href="#AdaptiveELU-67"><span class="linenos">67</span></a>
+</span><span id="AdaptiveELU-68"><a href="#AdaptiveELU-68"><span class="linenos">68</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="AdaptiveELU-69"><a href="#AdaptiveELU-69"><span class="linenos">69</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU-70"><a href="#AdaptiveELU-70"><span class="linenos">70</span></a><span class="sd">        Forward pass of the AdaptiveELU activation function.</span>
+</span><span id="AdaptiveELU-71"><a href="#AdaptiveELU-71"><span class="linenos">71</span></a>
+</span><span id="AdaptiveELU-72"><a href="#AdaptiveELU-72"><span class="linenos">72</span></a><span class="sd">        Args:</span>
+</span><span id="AdaptiveELU-73"><a href="#AdaptiveELU-73"><span class="linenos">73</span></a><span class="sd">            x (torch.Tensor): input tensor</span>
+</span><span id="AdaptiveELU-74"><a href="#AdaptiveELU-74"><span class="linenos">74</span></a>
+</span><span id="AdaptiveELU-75"><a href="#AdaptiveELU-75"><span class="linenos">75</span></a><span class="sd">        Returns:</span>
+</span><span id="AdaptiveELU-76"><a href="#AdaptiveELU-76"><span class="linenos">76</span></a><span class="sd">            torch.Tensor: output tensor</span>
+</span><span id="AdaptiveELU-77"><a href="#AdaptiveELU-77"><span class="linenos">77</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU-78"><a href="#AdaptiveELU-78"><span class="linenos">78</span></a>        <span class="k">return</span> <span class="n">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -407,43 +449,43 @@ This helps to ensure the output to stay positive.</p>
 
     </div>
     <a class="headerlink" href="#AdaptiveELU.__init__"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="AdaptiveELU.__init__-37"><a href="#AdaptiveELU.__init__-37"><span class="linenos">37</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xshift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">yshift</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-</span><span id="AdaptiveELU.__init__-38"><a href="#AdaptiveELU.__init__-38"><span class="linenos">38</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU.__init__-39"><a href="#AdaptiveELU.__init__-39"><span class="linenos">39</span></a><span class="sd">        Initialize the AdaptiveELU activation function.</span>
-</span><span id="AdaptiveELU.__init__-40"><a href="#AdaptiveELU.__init__-40"><span class="linenos">40</span></a>
-</span><span id="AdaptiveELU.__init__-41"><a href="#AdaptiveELU.__init__-41"><span class="linenos">41</span></a><span class="sd">        Parameters:</span>
-</span><span id="AdaptiveELU.__init__-42"><a href="#AdaptiveELU.__init__-42"><span class="linenos">42</span></a><span class="sd">        - xshift (float): shift in x direction</span>
-</span><span id="AdaptiveELU.__init__-43"><a href="#AdaptiveELU.__init__-43"><span class="linenos">43</span></a><span class="sd">        - yshift (float): shift in y direction</span>
-</span><span id="AdaptiveELU.__init__-44"><a href="#AdaptiveELU.__init__-44"><span class="linenos">44</span></a><span class="sd">        - inplace (bool): whether to modify the input tensor in place</span>
-</span><span id="AdaptiveELU.__init__-45"><a href="#AdaptiveELU.__init__-45"><span class="linenos">45</span></a><span class="sd">        - **kwargs: additional keyword arguments</span>
-</span><span id="AdaptiveELU.__init__-46"><a href="#AdaptiveELU.__init__-46"><span class="linenos">46</span></a>
-</span><span id="AdaptiveELU.__init__-47"><a href="#AdaptiveELU.__init__-47"><span class="linenos">47</span></a><span class="sd">        Returns:</span>
-</span><span id="AdaptiveELU.__init__-48"><a href="#AdaptiveELU.__init__-48"><span class="linenos">48</span></a><span class="sd">        - None</span>
-</span><span id="AdaptiveELU.__init__-49"><a href="#AdaptiveELU.__init__-49"><span class="linenos">49</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU.__init__-50"><a href="#AdaptiveELU.__init__-50"><span class="linenos">50</span></a>        <span class="nb">super</span><span class="p">(</span><span class="n">AdaptiveELU</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="AdaptiveELU.__init__-51"><a href="#AdaptiveELU.__init__-51"><span class="linenos">51</span></a>
-</span><span id="AdaptiveELU.__init__-52"><a href="#AdaptiveELU.__init__-52"><span class="linenos">52</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span> <span class="o">=</span> <span class="n">xshift</span>
-</span><span id="AdaptiveELU.__init__-53"><a href="#AdaptiveELU.__init__-53"><span class="linenos">53</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span> <span class="o">=</span> <span class="n">yshift</span>
-</span><span id="AdaptiveELU.__init__-54"><a href="#AdaptiveELU.__init__-54"><span class="linenos">54</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="AdaptiveELU.__init__-49"><a href="#AdaptiveELU.__init__-49"><span class="linenos">49</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xshift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">yshift</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="AdaptiveELU.__init__-50"><a href="#AdaptiveELU.__init__-50"><span class="linenos">50</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU.__init__-51"><a href="#AdaptiveELU.__init__-51"><span class="linenos">51</span></a><span class="sd">        Initialize the AdaptiveELU activation function.</span>
+</span><span id="AdaptiveELU.__init__-52"><a href="#AdaptiveELU.__init__-52"><span class="linenos">52</span></a>
+</span><span id="AdaptiveELU.__init__-53"><a href="#AdaptiveELU.__init__-53"><span class="linenos">53</span></a><span class="sd">        Args:</span>
+</span><span id="AdaptiveELU.__init__-54"><a href="#AdaptiveELU.__init__-54"><span class="linenos">54</span></a><span class="sd">            xshift (float): shift in x direction</span>
+</span><span id="AdaptiveELU.__init__-55"><a href="#AdaptiveELU.__init__-55"><span class="linenos">55</span></a><span class="sd">            yshift (float): shift in y direction</span>
+</span><span id="AdaptiveELU.__init__-56"><a href="#AdaptiveELU.__init__-56"><span class="linenos">56</span></a><span class="sd">            inplace (bool): whether to modify the input tensor in place</span>
+</span><span id="AdaptiveELU.__init__-57"><a href="#AdaptiveELU.__init__-57"><span class="linenos">57</span></a><span class="sd">            **kwargs: additional keyword arguments</span>
+</span><span id="AdaptiveELU.__init__-58"><a href="#AdaptiveELU.__init__-58"><span class="linenos">58</span></a>
+</span><span id="AdaptiveELU.__init__-59"><a href="#AdaptiveELU.__init__-59"><span class="linenos">59</span></a><span class="sd">        Returns:</span>
+</span><span id="AdaptiveELU.__init__-60"><a href="#AdaptiveELU.__init__-60"><span class="linenos">60</span></a><span class="sd">            None</span>
+</span><span id="AdaptiveELU.__init__-61"><a href="#AdaptiveELU.__init__-61"><span class="linenos">61</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU.__init__-62"><a href="#AdaptiveELU.__init__-62"><span class="linenos">62</span></a>        <span class="nb">super</span><span class="p">(</span><span class="n">AdaptiveELU</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="AdaptiveELU.__init__-63"><a href="#AdaptiveELU.__init__-63"><span class="linenos">63</span></a>
+</span><span id="AdaptiveELU.__init__-64"><a href="#AdaptiveELU.__init__-64"><span class="linenos">64</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span> <span class="o">=</span> <span class="n">xshift</span>
+</span><span id="AdaptiveELU.__init__-65"><a href="#AdaptiveELU.__init__-65"><span class="linenos">65</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span> <span class="o">=</span> <span class="n">yshift</span>
+</span><span id="AdaptiveELU.__init__-66"><a href="#AdaptiveELU.__init__-66"><span class="linenos">66</span></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inplace</span> <span class="o">=</span> <span class="n">inplace</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Initialize the AdaptiveELU activation function.</p>
 
-<p>Parameters:</p>
+<h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li>xshift (float): shift in x direction</li>
-<li>yshift (float): shift in y direction</li>
-<li>inplace (bool): whether to modify the input tensor in place</li>
-<li>**kwargs: additional keyword arguments</li>
+<li><strong>xshift (float):</strong>  shift in x direction</li>
+<li><strong>yshift (float):</strong>  shift in y direction</li>
+<li><strong>inplace (bool):</strong>  whether to modify the input tensor in place</li>
+<li><strong>**kwargs:</strong>  additional keyword arguments</li>
 </ul>
 
-<p>Returns:</p>
+<h6 id="returns">Returns:</h6>
 
-<ul>
-<li>None</li>
-</ul>
+<blockquote>
+  <p>None</p>
+</blockquote>
 </div>
 
 
@@ -492,33 +534,33 @@ This helps to ensure the output to stay positive.</p>
 
     </div>
     <a class="headerlink" href="#AdaptiveELU.forward"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="AdaptiveELU.forward-56"><a href="#AdaptiveELU.forward-56"><span class="linenos">56</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-</span><span id="AdaptiveELU.forward-57"><a href="#AdaptiveELU.forward-57"><span class="linenos">57</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU.forward-58"><a href="#AdaptiveELU.forward-58"><span class="linenos">58</span></a><span class="sd">        Forward pass of the AdaptiveELU activation function.</span>
-</span><span id="AdaptiveELU.forward-59"><a href="#AdaptiveELU.forward-59"><span class="linenos">59</span></a>
-</span><span id="AdaptiveELU.forward-60"><a href="#AdaptiveELU.forward-60"><span class="linenos">60</span></a><span class="sd">        Parameters:</span>
-</span><span id="AdaptiveELU.forward-61"><a href="#AdaptiveELU.forward-61"><span class="linenos">61</span></a><span class="sd">        - x (torch.Tensor): input tensor</span>
-</span><span id="AdaptiveELU.forward-62"><a href="#AdaptiveELU.forward-62"><span class="linenos">62</span></a>
-</span><span id="AdaptiveELU.forward-63"><a href="#AdaptiveELU.forward-63"><span class="linenos">63</span></a><span class="sd">        Returns:</span>
-</span><span id="AdaptiveELU.forward-64"><a href="#AdaptiveELU.forward-64"><span class="linenos">64</span></a><span class="sd">        - torch.Tensor: output tensor</span>
-</span><span id="AdaptiveELU.forward-65"><a href="#AdaptiveELU.forward-65"><span class="linenos">65</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="AdaptiveELU.forward-66"><a href="#AdaptiveELU.forward-66"><span class="linenos">66</span></a>        <span class="k">return</span> <span class="n">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="AdaptiveELU.forward-68"><a href="#AdaptiveELU.forward-68"><span class="linenos">68</span></a>    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+</span><span id="AdaptiveELU.forward-69"><a href="#AdaptiveELU.forward-69"><span class="linenos">69</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU.forward-70"><a href="#AdaptiveELU.forward-70"><span class="linenos">70</span></a><span class="sd">        Forward pass of the AdaptiveELU activation function.</span>
+</span><span id="AdaptiveELU.forward-71"><a href="#AdaptiveELU.forward-71"><span class="linenos">71</span></a>
+</span><span id="AdaptiveELU.forward-72"><a href="#AdaptiveELU.forward-72"><span class="linenos">72</span></a><span class="sd">        Args:</span>
+</span><span id="AdaptiveELU.forward-73"><a href="#AdaptiveELU.forward-73"><span class="linenos">73</span></a><span class="sd">            x (torch.Tensor): input tensor</span>
+</span><span id="AdaptiveELU.forward-74"><a href="#AdaptiveELU.forward-74"><span class="linenos">74</span></a>
+</span><span id="AdaptiveELU.forward-75"><a href="#AdaptiveELU.forward-75"><span class="linenos">75</span></a><span class="sd">        Returns:</span>
+</span><span id="AdaptiveELU.forward-76"><a href="#AdaptiveELU.forward-76"><span class="linenos">76</span></a><span class="sd">            torch.Tensor: output tensor</span>
+</span><span id="AdaptiveELU.forward-77"><a href="#AdaptiveELU.forward-77"><span class="linenos">77</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="AdaptiveELU.forward-78"><a href="#AdaptiveELU.forward-78"><span class="linenos">78</span></a>        <span class="k">return</span> <span class="n">adaptive_elu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xshift</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">yshift</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inplace</span><span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Forward pass of the AdaptiveELU activation function.</p>
 
-<p>Parameters:</p>
+<h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li>x (torch.Tensor): input tensor</li>
+<li><strong>x (torch.Tensor):</strong>  input tensor</li>
 </ul>
 
-<p>Returns:</p>
+<h6 id="returns">Returns:</h6>
 
-<ul>
-<li>torch.Tensor: output tensor</li>
-</ul>
+<blockquote>
+  <p>torch.Tensor: output tensor</p>
+</blockquote>
 </div>
 
 

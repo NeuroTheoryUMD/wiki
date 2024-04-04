@@ -131,11 +131,11 @@
 </span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="sd">    Generator that returns batches of timepoints for a single experiment.</span>
 </span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>
-</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="sd">    Parameters:</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="sd">        - timepoints (list): list of timepoints to sample from</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="sd">        - batch_size (int): size of the batch to sample</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="sd">        - shuffle (bool): whether to shuffle the batches</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="sd">        - random_seed (int): random seed to use for shuffling</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="sd">    Args:</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="sd">        timepoints (list): list of timepoints to sample from</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="sd">        batch_size (int): size of the batch to sample</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="sd">        shuffle (bool): whether to shuffle the batches</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="sd">        random_seed (int): random seed to use for shuffling</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>    
 </span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timepoints</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">shuffle</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -159,7 +159,7 @@
 </span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a><span class="sd">        Next method of the generator.</span>
 </span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>
 </span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a><span class="sd">        Returns:</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">        - the next batch</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a><span class="sd">            the next batch</span>
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_batch_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batches</span><span class="p">):</span>
 </span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>            <span class="n">batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batches</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_batch_index</span><span class="p">]</span>
@@ -174,11 +174,11 @@
 </span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a><span class="sd">    Iterator that returns batches of timepoints across experiments.</span>
 </span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">    Parameters:</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">        - exp_to_time (dict): map from experiment indices to timepoints</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">        - exp_batch_sizes (list): list of batch sizes for each experiment</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">        - shuffle (bool): whether to shuffle the batches</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">        - random_seed (int): random seed to use for shuffling</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a><span class="sd">    Args:</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a><span class="sd">        exp_to_time (dict): map from experiment indices to timepoints</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a><span class="sd">        exp_batch_sizes (list): list of batch sizes for each experiment</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a><span class="sd">        shuffle (bool): whether to shuffle the batches</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a><span class="sd">        random_seed (int): random seed to use for shuffling</span>
 </span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>
 </span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp_to_time</span><span class="p">,</span> <span class="n">exp_batch_sizes</span><span class="p">,</span> <span class="n">shuffle</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -194,7 +194,7 @@
 </span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">        Next method of the iterator.</span>
 </span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>
 </span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="sd">        Returns:</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">        - the next batch</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">            the next batch</span>
 </span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>        <span class="c1"># get the next batch for each experiment and accumulate</span>
 </span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>        <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
@@ -207,9 +207,9 @@
 </span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a><span class="sd">    Construct a dictionary that maps experiment indices to timepoints.</span>
 </span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a><span class="sd">    </span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">    Parameters:</span>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">    - dataset (Dataset): dataset to sample from</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">    - indices (list): indices to filter by</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a><span class="sd">    Args:</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a><span class="sd">        dataset (Dataset): dataset to sample from</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a><span class="sd">        indices (list): indices to filter by</span>
 </span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    
 </span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="c1"># diff the dataset.file_index</span>
@@ -245,13 +245,13 @@
 </span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a><span class="sd">    Samples elements across experiments.</span>
 </span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">    Parameters:</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        - dataset (Dataset): dataset to sample from</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">        - batch_size (int): size of the batch to sample</span>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">        - indices (list): indices to sample from</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">        - shuffle (bool): whether to shuffle the indices</span>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="sd">        - random_seed (int): random seed to use for shuffling</span>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a><span class="sd">        - verbose (bool): whether to print out information about the sampler</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a><span class="sd">    Args:</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a><span class="sd">        dataset (Dataset): dataset to sample from</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a><span class="sd">        batch_size (int): size of the batch to sample</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a><span class="sd">        indices (list): indices to sample from</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a><span class="sd">        shuffle (bool): whether to shuffle the indices</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="sd">        random_seed (int): random seed to use for shuffling</span>
+</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a><span class="sd">        verbose (bool): whether to print out information about the sampler</span>
 </span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>    
 </span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span><span class="nb">list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shuffle</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -312,11 +312,11 @@
 </span><span id="ExperimentBatchGenerator-10"><a href="#ExperimentBatchGenerator-10"><span class="linenos">10</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="ExperimentBatchGenerator-11"><a href="#ExperimentBatchGenerator-11"><span class="linenos">11</span></a><span class="sd">    Generator that returns batches of timepoints for a single experiment.</span>
 </span><span id="ExperimentBatchGenerator-12"><a href="#ExperimentBatchGenerator-12"><span class="linenos">12</span></a>
-</span><span id="ExperimentBatchGenerator-13"><a href="#ExperimentBatchGenerator-13"><span class="linenos">13</span></a><span class="sd">    Parameters:</span>
-</span><span id="ExperimentBatchGenerator-14"><a href="#ExperimentBatchGenerator-14"><span class="linenos">14</span></a><span class="sd">        - timepoints (list): list of timepoints to sample from</span>
-</span><span id="ExperimentBatchGenerator-15"><a href="#ExperimentBatchGenerator-15"><span class="linenos">15</span></a><span class="sd">        - batch_size (int): size of the batch to sample</span>
-</span><span id="ExperimentBatchGenerator-16"><a href="#ExperimentBatchGenerator-16"><span class="linenos">16</span></a><span class="sd">        - shuffle (bool): whether to shuffle the batches</span>
-</span><span id="ExperimentBatchGenerator-17"><a href="#ExperimentBatchGenerator-17"><span class="linenos">17</span></a><span class="sd">        - random_seed (int): random seed to use for shuffling</span>
+</span><span id="ExperimentBatchGenerator-13"><a href="#ExperimentBatchGenerator-13"><span class="linenos">13</span></a><span class="sd">    Args:</span>
+</span><span id="ExperimentBatchGenerator-14"><a href="#ExperimentBatchGenerator-14"><span class="linenos">14</span></a><span class="sd">        timepoints (list): list of timepoints to sample from</span>
+</span><span id="ExperimentBatchGenerator-15"><a href="#ExperimentBatchGenerator-15"><span class="linenos">15</span></a><span class="sd">        batch_size (int): size of the batch to sample</span>
+</span><span id="ExperimentBatchGenerator-16"><a href="#ExperimentBatchGenerator-16"><span class="linenos">16</span></a><span class="sd">        shuffle (bool): whether to shuffle the batches</span>
+</span><span id="ExperimentBatchGenerator-17"><a href="#ExperimentBatchGenerator-17"><span class="linenos">17</span></a><span class="sd">        random_seed (int): random seed to use for shuffling</span>
 </span><span id="ExperimentBatchGenerator-18"><a href="#ExperimentBatchGenerator-18"><span class="linenos">18</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="ExperimentBatchGenerator-19"><a href="#ExperimentBatchGenerator-19"><span class="linenos">19</span></a>    
 </span><span id="ExperimentBatchGenerator-20"><a href="#ExperimentBatchGenerator-20"><span class="linenos">20</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timepoints</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">shuffle</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -340,7 +340,7 @@
 </span><span id="ExperimentBatchGenerator-38"><a href="#ExperimentBatchGenerator-38"><span class="linenos">38</span></a><span class="sd">        Next method of the generator.</span>
 </span><span id="ExperimentBatchGenerator-39"><a href="#ExperimentBatchGenerator-39"><span class="linenos">39</span></a>
 </span><span id="ExperimentBatchGenerator-40"><a href="#ExperimentBatchGenerator-40"><span class="linenos">40</span></a><span class="sd">        Returns:</span>
-</span><span id="ExperimentBatchGenerator-41"><a href="#ExperimentBatchGenerator-41"><span class="linenos">41</span></a><span class="sd">        - the next batch</span>
+</span><span id="ExperimentBatchGenerator-41"><a href="#ExperimentBatchGenerator-41"><span class="linenos">41</span></a><span class="sd">            the next batch</span>
 </span><span id="ExperimentBatchGenerator-42"><a href="#ExperimentBatchGenerator-42"><span class="linenos">42</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="ExperimentBatchGenerator-43"><a href="#ExperimentBatchGenerator-43"><span class="linenos">43</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_batch_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batches</span><span class="p">):</span>
 </span><span id="ExperimentBatchGenerator-44"><a href="#ExperimentBatchGenerator-44"><span class="linenos">44</span></a>            <span class="n">batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batches</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_batch_index</span><span class="p">]</span>
@@ -357,10 +357,10 @@
 <h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li><strong>- timepoints (list):</strong>  list of timepoints to sample from</li>
-<li><strong>- batch_size (int):</strong>  size of the batch to sample</li>
-<li><strong>- shuffle (bool):</strong>  whether to shuffle the batches</li>
-<li><strong>- random_seed (int):</strong>  random seed to use for shuffling</li>
+<li><strong>timepoints (list):</strong>  list of timepoints to sample from</li>
+<li><strong>batch_size (int):</strong>  size of the batch to sample</li>
+<li><strong>shuffle (bool):</strong>  whether to shuffle the batches</li>
+<li><strong>random_seed (int):</strong>  random seed to use for shuffling</li>
 </ul>
 </div>
 
@@ -434,7 +434,7 @@
 </span><span id="ExperimentBatchGenerator.next-38"><a href="#ExperimentBatchGenerator.next-38"><span class="linenos">38</span></a><span class="sd">        Next method of the generator.</span>
 </span><span id="ExperimentBatchGenerator.next-39"><a href="#ExperimentBatchGenerator.next-39"><span class="linenos">39</span></a>
 </span><span id="ExperimentBatchGenerator.next-40"><a href="#ExperimentBatchGenerator.next-40"><span class="linenos">40</span></a><span class="sd">        Returns:</span>
-</span><span id="ExperimentBatchGenerator.next-41"><a href="#ExperimentBatchGenerator.next-41"><span class="linenos">41</span></a><span class="sd">        - the next batch</span>
+</span><span id="ExperimentBatchGenerator.next-41"><a href="#ExperimentBatchGenerator.next-41"><span class="linenos">41</span></a><span class="sd">            the next batch</span>
 </span><span id="ExperimentBatchGenerator.next-42"><a href="#ExperimentBatchGenerator.next-42"><span class="linenos">42</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="ExperimentBatchGenerator.next-43"><a href="#ExperimentBatchGenerator.next-43"><span class="linenos">43</span></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_batch_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batches</span><span class="p">):</span>
 </span><span id="ExperimentBatchGenerator.next-44"><a href="#ExperimentBatchGenerator.next-44"><span class="linenos">44</span></a>            <span class="n">batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batches</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_batch_index</span><span class="p">]</span>
@@ -448,11 +448,11 @@
 
             <div class="docstring"><p>Next method of the generator.</p>
 
-<p>Returns:</p>
+<h6 id="returns">Returns:</h6>
 
-<ul>
-<li>the next batch</li>
-</ul>
+<blockquote>
+  <p>the next batch</p>
+</blockquote>
 </div>
 
 
@@ -473,11 +473,11 @@
 </span><span id="ExperimentBatchIterator-53"><a href="#ExperimentBatchIterator-53"><span class="linenos">53</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="ExperimentBatchIterator-54"><a href="#ExperimentBatchIterator-54"><span class="linenos">54</span></a><span class="sd">    Iterator that returns batches of timepoints across experiments.</span>
 </span><span id="ExperimentBatchIterator-55"><a href="#ExperimentBatchIterator-55"><span class="linenos">55</span></a>
-</span><span id="ExperimentBatchIterator-56"><a href="#ExperimentBatchIterator-56"><span class="linenos">56</span></a><span class="sd">    Parameters:</span>
-</span><span id="ExperimentBatchIterator-57"><a href="#ExperimentBatchIterator-57"><span class="linenos">57</span></a><span class="sd">        - exp_to_time (dict): map from experiment indices to timepoints</span>
-</span><span id="ExperimentBatchIterator-58"><a href="#ExperimentBatchIterator-58"><span class="linenos">58</span></a><span class="sd">        - exp_batch_sizes (list): list of batch sizes for each experiment</span>
-</span><span id="ExperimentBatchIterator-59"><a href="#ExperimentBatchIterator-59"><span class="linenos">59</span></a><span class="sd">        - shuffle (bool): whether to shuffle the batches</span>
-</span><span id="ExperimentBatchIterator-60"><a href="#ExperimentBatchIterator-60"><span class="linenos">60</span></a><span class="sd">        - random_seed (int): random seed to use for shuffling</span>
+</span><span id="ExperimentBatchIterator-56"><a href="#ExperimentBatchIterator-56"><span class="linenos">56</span></a><span class="sd">    Args:</span>
+</span><span id="ExperimentBatchIterator-57"><a href="#ExperimentBatchIterator-57"><span class="linenos">57</span></a><span class="sd">        exp_to_time (dict): map from experiment indices to timepoints</span>
+</span><span id="ExperimentBatchIterator-58"><a href="#ExperimentBatchIterator-58"><span class="linenos">58</span></a><span class="sd">        exp_batch_sizes (list): list of batch sizes for each experiment</span>
+</span><span id="ExperimentBatchIterator-59"><a href="#ExperimentBatchIterator-59"><span class="linenos">59</span></a><span class="sd">        shuffle (bool): whether to shuffle the batches</span>
+</span><span id="ExperimentBatchIterator-60"><a href="#ExperimentBatchIterator-60"><span class="linenos">60</span></a><span class="sd">        random_seed (int): random seed to use for shuffling</span>
 </span><span id="ExperimentBatchIterator-61"><a href="#ExperimentBatchIterator-61"><span class="linenos">61</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="ExperimentBatchIterator-62"><a href="#ExperimentBatchIterator-62"><span class="linenos">62</span></a>
 </span><span id="ExperimentBatchIterator-63"><a href="#ExperimentBatchIterator-63"><span class="linenos">63</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exp_to_time</span><span class="p">,</span> <span class="n">exp_batch_sizes</span><span class="p">,</span> <span class="n">shuffle</span><span class="p">:</span><span class="nb">bool</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -493,7 +493,7 @@
 </span><span id="ExperimentBatchIterator-73"><a href="#ExperimentBatchIterator-73"><span class="linenos">73</span></a><span class="sd">        Next method of the iterator.</span>
 </span><span id="ExperimentBatchIterator-74"><a href="#ExperimentBatchIterator-74"><span class="linenos">74</span></a>
 </span><span id="ExperimentBatchIterator-75"><a href="#ExperimentBatchIterator-75"><span class="linenos">75</span></a><span class="sd">        Returns:</span>
-</span><span id="ExperimentBatchIterator-76"><a href="#ExperimentBatchIterator-76"><span class="linenos">76</span></a><span class="sd">        - the next batch</span>
+</span><span id="ExperimentBatchIterator-76"><a href="#ExperimentBatchIterator-76"><span class="linenos">76</span></a><span class="sd">            the next batch</span>
 </span><span id="ExperimentBatchIterator-77"><a href="#ExperimentBatchIterator-77"><span class="linenos">77</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="ExperimentBatchIterator-78"><a href="#ExperimentBatchIterator-78"><span class="linenos">78</span></a>        <span class="c1"># get the next batch for each experiment and accumulate</span>
 </span><span id="ExperimentBatchIterator-79"><a href="#ExperimentBatchIterator-79"><span class="linenos">79</span></a>        <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
@@ -508,10 +508,10 @@
 <h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li><strong>- exp_to_time (dict):</strong>  map from experiment indices to timepoints</li>
-<li><strong>- exp_batch_sizes (list):</strong>  list of batch sizes for each experiment</li>
-<li><strong>- shuffle (bool):</strong>  whether to shuffle the batches</li>
-<li><strong>- random_seed (int):</strong>  random seed to use for shuffling</li>
+<li><strong>exp_to_time (dict):</strong>  map from experiment indices to timepoints</li>
+<li><strong>exp_batch_sizes (list):</strong>  list of batch sizes for each experiment</li>
+<li><strong>shuffle (bool):</strong>  whether to shuffle the batches</li>
+<li><strong>random_seed (int):</strong>  random seed to use for shuffling</li>
 </ul>
 </div>
 
@@ -566,9 +566,9 @@
 </span><span id="construct_exp_to_time-86"><a href="#construct_exp_to_time-86"><span class="linenos"> 86</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="construct_exp_to_time-87"><a href="#construct_exp_to_time-87"><span class="linenos"> 87</span></a><span class="sd">    Construct a dictionary that maps experiment indices to timepoints.</span>
 </span><span id="construct_exp_to_time-88"><a href="#construct_exp_to_time-88"><span class="linenos"> 88</span></a><span class="sd">    </span>
-</span><span id="construct_exp_to_time-89"><a href="#construct_exp_to_time-89"><span class="linenos"> 89</span></a><span class="sd">    Parameters:</span>
-</span><span id="construct_exp_to_time-90"><a href="#construct_exp_to_time-90"><span class="linenos"> 90</span></a><span class="sd">    - dataset (Dataset): dataset to sample from</span>
-</span><span id="construct_exp_to_time-91"><a href="#construct_exp_to_time-91"><span class="linenos"> 91</span></a><span class="sd">    - indices (list): indices to filter by</span>
+</span><span id="construct_exp_to_time-89"><a href="#construct_exp_to_time-89"><span class="linenos"> 89</span></a><span class="sd">    Args:</span>
+</span><span id="construct_exp_to_time-90"><a href="#construct_exp_to_time-90"><span class="linenos"> 90</span></a><span class="sd">        dataset (Dataset): dataset to sample from</span>
+</span><span id="construct_exp_to_time-91"><a href="#construct_exp_to_time-91"><span class="linenos"> 91</span></a><span class="sd">        indices (list): indices to filter by</span>
 </span><span id="construct_exp_to_time-92"><a href="#construct_exp_to_time-92"><span class="linenos"> 92</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="construct_exp_to_time-93"><a href="#construct_exp_to_time-93"><span class="linenos"> 93</span></a>    
 </span><span id="construct_exp_to_time-94"><a href="#construct_exp_to_time-94"><span class="linenos"> 94</span></a>    <span class="c1"># diff the dataset.file_index</span>
@@ -604,11 +604,11 @@
 
             <div class="docstring"><p>Construct a dictionary that maps experiment indices to timepoints.</p>
 
-<p>Parameters:</p>
+<h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li>dataset (Dataset): dataset to sample from</li>
-<li>indices (list): indices to filter by</li>
+<li><strong>dataset (Dataset):</strong>  dataset to sample from</li>
+<li><strong>indices (list):</strong>  indices to filter by</li>
 </ul>
 </div>
 
@@ -629,13 +629,13 @@
 </span><span id="ExperimentSampler-124"><a href="#ExperimentSampler-124"><span class="linenos">124</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="ExperimentSampler-125"><a href="#ExperimentSampler-125"><span class="linenos">125</span></a><span class="sd">    Samples elements across experiments.</span>
 </span><span id="ExperimentSampler-126"><a href="#ExperimentSampler-126"><span class="linenos">126</span></a>
-</span><span id="ExperimentSampler-127"><a href="#ExperimentSampler-127"><span class="linenos">127</span></a><span class="sd">    Parameters:</span>
-</span><span id="ExperimentSampler-128"><a href="#ExperimentSampler-128"><span class="linenos">128</span></a><span class="sd">        - dataset (Dataset): dataset to sample from</span>
-</span><span id="ExperimentSampler-129"><a href="#ExperimentSampler-129"><span class="linenos">129</span></a><span class="sd">        - batch_size (int): size of the batch to sample</span>
-</span><span id="ExperimentSampler-130"><a href="#ExperimentSampler-130"><span class="linenos">130</span></a><span class="sd">        - indices (list): indices to sample from</span>
-</span><span id="ExperimentSampler-131"><a href="#ExperimentSampler-131"><span class="linenos">131</span></a><span class="sd">        - shuffle (bool): whether to shuffle the indices</span>
-</span><span id="ExperimentSampler-132"><a href="#ExperimentSampler-132"><span class="linenos">132</span></a><span class="sd">        - random_seed (int): random seed to use for shuffling</span>
-</span><span id="ExperimentSampler-133"><a href="#ExperimentSampler-133"><span class="linenos">133</span></a><span class="sd">        - verbose (bool): whether to print out information about the sampler</span>
+</span><span id="ExperimentSampler-127"><a href="#ExperimentSampler-127"><span class="linenos">127</span></a><span class="sd">    Args:</span>
+</span><span id="ExperimentSampler-128"><a href="#ExperimentSampler-128"><span class="linenos">128</span></a><span class="sd">        dataset (Dataset): dataset to sample from</span>
+</span><span id="ExperimentSampler-129"><a href="#ExperimentSampler-129"><span class="linenos">129</span></a><span class="sd">        batch_size (int): size of the batch to sample</span>
+</span><span id="ExperimentSampler-130"><a href="#ExperimentSampler-130"><span class="linenos">130</span></a><span class="sd">        indices (list): indices to sample from</span>
+</span><span id="ExperimentSampler-131"><a href="#ExperimentSampler-131"><span class="linenos">131</span></a><span class="sd">        shuffle (bool): whether to shuffle the indices</span>
+</span><span id="ExperimentSampler-132"><a href="#ExperimentSampler-132"><span class="linenos">132</span></a><span class="sd">        random_seed (int): random seed to use for shuffling</span>
+</span><span id="ExperimentSampler-133"><a href="#ExperimentSampler-133"><span class="linenos">133</span></a><span class="sd">        verbose (bool): whether to print out information about the sampler</span>
 </span><span id="ExperimentSampler-134"><a href="#ExperimentSampler-134"><span class="linenos">134</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="ExperimentSampler-135"><a href="#ExperimentSampler-135"><span class="linenos">135</span></a>    
 </span><span id="ExperimentSampler-136"><a href="#ExperimentSampler-136"><span class="linenos">136</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span><span class="nb">list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shuffle</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -685,12 +685,12 @@
 <h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li><strong>- dataset (Dataset):</strong>  dataset to sample from</li>
-<li><strong>- batch_size (int):</strong>  size of the batch to sample</li>
-<li><strong>- indices (list):</strong>  indices to sample from</li>
-<li><strong>- shuffle (bool):</strong>  whether to shuffle the indices</li>
-<li><strong>- random_seed (int):</strong>  random seed to use for shuffling</li>
-<li><strong>- verbose (bool):</strong>  whether to print out information about the sampler</li>
+<li><strong>dataset (Dataset):</strong>  dataset to sample from</li>
+<li><strong>batch_size (int):</strong>  size of the batch to sample</li>
+<li><strong>indices (list):</strong>  indices to sample from</li>
+<li><strong>shuffle (bool):</strong>  whether to shuffle the indices</li>
+<li><strong>random_seed (int):</strong>  random seed to use for shuffling</li>
+<li><strong>verbose (bool):</strong>  whether to print out information about the sampler</li>
 </ul>
 </div>
 

@@ -1578,7 +1578,22 @@ Args (optional):
 </span></pre></div>
 
 
-            <div class="docstring"><p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+            <div class="docstring"><p>Initialize the layer.</p>
+
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>input_dims:</strong>  list of 4 ints, dimensions of input</li>
+<li><strong>num_filters:</strong>  int, number of filters in layer</li>
+<li><strong>NLtype:</strong>  str, type of nonlinearity to use (see activations.py)</li>
+<li><strong>norm:</strong>  int, type of filter normalization to use (0=None, 1=filters are unit vectors, 2=maxnorm?)</li>
+<li><strong>pos_constraint:</strong>  bool, whether to constrain weights to be positive</li>
+<li><strong>num_inh:</strong>  int, number of inhibitory units (creates ei_mask and makes "inhibitory" units have negative output)</li>
+<li><strong>bias:</strong>  bool, whether to include bias term</li>
+<li><strong>weight_init:</strong>  str, type of weight initialization to use (see reset_parameters, default 'xavier_uniform')</li>
+<li><strong>bias_init:</strong>  str, type of bias initialization to use (see reset_parameters, default 'zeros')</li>
+<li><strong>reg_vals:</strong>  dict, regularization values to use (see regularizers.py)</li>
+</ul>
 </div>
 
 
@@ -1839,7 +1854,15 @@ Output is a dictionary with these keywords.
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Preprocess the weights before using them in the forward pass.</p>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>w: torch.Tensor, preprocessed weights</p>
+</blockquote>
+</div>
+
 
                             </div>
                             <div id="ConvLayer.forward" class="classattr">
@@ -1966,18 +1989,19 @@ Output is a dictionary with these keywords.
 </span></pre></div>
 
 
-            <div class="docstring"><p>Defines the computation performed at every call.</p>
+            <div class="docstring"><p>Forward pass for the layer.</p>
 
-<p>Should be overridden by all subclasses.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<div class="pdoc-alert pdoc-alert-note">
+<ul>
+<li><strong>x:</strong>  torch.Tensor, input tensor</li>
+</ul>
 
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code>Module</code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
+<h6 id="returns">Returns:</h6>
 
-</div>
+<blockquote>
+  <p>x: torch.Tensor, output tensor</p>
+</blockquote>
 </div>
 
 
@@ -2343,7 +2367,22 @@ w &lt; W, h &lt; H</li>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+            <div class="docstring"><p>Initialize the layer.</p>
+
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>input_dims:</strong>  list of 4 ints, dimensions of input</li>
+<li><strong>num_filters:</strong>  int, number of filters in layer</li>
+<li><strong>NLtype:</strong>  str, type of nonlinearity to use (see activations.py)</li>
+<li><strong>norm:</strong>  int, type of filter normalization to use (0=None, 1=filters are unit vectors, 2=maxnorm?)</li>
+<li><strong>pos_constraint:</strong>  bool, whether to constrain weights to be positive</li>
+<li><strong>num_inh:</strong>  int, number of inhibitory units (creates ei_mask and makes "inhibitory" units have negative output)</li>
+<li><strong>bias:</strong>  bool, whether to include bias term</li>
+<li><strong>weight_init:</strong>  str, type of weight initialization to use (see reset_parameters, default 'xavier_uniform')</li>
+<li><strong>bias_init:</strong>  str, type of bias initialization to use (see reset_parameters, default 'zeros')</li>
+<li><strong>reg_vals:</strong>  dict, regularization values to use (see regularizers.py)</li>
+</ul>
 </div>
 
 
@@ -2457,18 +2496,19 @@ w &lt; W, h &lt; H</li>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Defines the computation performed at every call.</p>
+            <div class="docstring"><p>Forward pass for the layer.</p>
 
-<p>Should be overridden by all subclasses.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<div class="pdoc-alert pdoc-alert-note">
+<ul>
+<li><strong>x:</strong>  torch.Tensor, input tensor</li>
+</ul>
 
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code>Module</code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
+<h6 id="returns">Returns:</h6>
 
-</div>
+<blockquote>
+  <p>x: torch.Tensor, output tensor</p>
+</blockquote>
 </div>
 
 
@@ -2503,6 +2543,12 @@ registered hooks while the latter silently ignores them.</p>
 <li><strong>row_height:</strong>  int, number of rows to use in plot (default 2)</li>
 <li><strong>time_reverse:</strong>  bool, whether to reverse the time dimension (default depends on dimension)</li>
 </ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>None</p>
+</blockquote>
 </div>
 
 
@@ -2858,7 +2904,22 @@ w &lt; W, h &lt; H</li>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+            <div class="docstring"><p>Initialize the layer.</p>
+
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>input_dims:</strong>  list of 4 ints, dimensions of input</li>
+<li><strong>num_filters:</strong>  int, number of filters in layer</li>
+<li><strong>NLtype:</strong>  str, type of nonlinearity to use (see activations.py)</li>
+<li><strong>norm:</strong>  int, type of filter normalization to use (0=None, 1=filters are unit vectors, 2=maxnorm?)</li>
+<li><strong>pos_constraint:</strong>  bool, whether to constrain weights to be positive</li>
+<li><strong>num_inh:</strong>  int, number of inhibitory units (creates ei_mask and makes "inhibitory" units have negative output)</li>
+<li><strong>bias:</strong>  bool, whether to include bias term</li>
+<li><strong>weight_init:</strong>  str, type of weight initialization to use (see reset_parameters, default 'xavier_uniform')</li>
+<li><strong>bias_init:</strong>  str, type of bias initialization to use (see reset_parameters, default 'zeros')</li>
+<li><strong>reg_vals:</strong>  dict, regularization values to use (see regularizers.py)</li>
+</ul>
 </div>
 
 
@@ -2883,9 +2944,9 @@ w &lt; W, h &lt; H</li>
 
     </div>
     <a class="headerlink" href="#STconvLayer.output_dims"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="STconvLayer.output_dims-158"><a href="#STconvLayer.output_dims-158"><span class="linenos">158</span></a>    <span class="nd">@property</span>
-</span><span id="STconvLayer.output_dims-159"><a href="#STconvLayer.output_dims-159"><span class="linenos">159</span></a>    <span class="k">def</span> <span class="nf">output_dims</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="STconvLayer.output_dims-160"><a href="#STconvLayer.output_dims-160"><span class="linenos">160</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="STconvLayer.output_dims-172"><a href="#STconvLayer.output_dims-172"><span class="linenos">172</span></a>    <span class="nd">@property</span>
+</span><span id="STconvLayer.output_dims-173"><a href="#STconvLayer.output_dims-173"><span class="linenos">173</span></a>    <span class="k">def</span> <span class="nf">output_dims</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="STconvLayer.output_dims-174"><a href="#STconvLayer.output_dims-174"><span class="linenos">174</span></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_dims</span>
 </span></pre></div>
 
 
@@ -3000,18 +3061,19 @@ w &lt; W, h &lt; H</li>
 </span></pre></div>
 
 
-            <div class="docstring"><p>Defines the computation performed at every call.</p>
+            <div class="docstring"><p>Forward pass for the layer.</p>
 
-<p>Should be overridden by all subclasses.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<div class="pdoc-alert pdoc-alert-note">
+<ul>
+<li><strong>x:</strong>  torch.Tensor, input tensor</li>
+</ul>
 
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code>Module</code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
+<h6 id="returns">Returns:</h6>
 
-</div>
+<blockquote>
+  <p>x: torch.Tensor, output tensor</p>
+</blockquote>
 </div>
 
 
@@ -3045,6 +3107,12 @@ registered hooks while the latter silently ignores them.</p>
 <li><strong>row_height:</strong>  int, number of rows to use in plot (default 2)</li>
 <li><strong>time_reverse:</strong>  bool, whether to reverse the time dimension (default depends on dimension)</li>
 </ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>None</p>
+</blockquote>
 </div>
 
 

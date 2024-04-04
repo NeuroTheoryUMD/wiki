@@ -91,15 +91,15 @@
 </span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="sd">    Implements the AdaHessian algorithm from &quot;ADAHESSIAN: An Adaptive Second OrderOptimizer for Machine Learning&quot;.</span>
 </span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="sd">    Parameters:</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="sd">    - params (iterable): iterable of parameters to optimize or dicts defining parameter groups</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="sd">    - lr (float, optional): learning rate (default: 0.1)</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="sd">    - betas ((float, float), optional): coefficients used for computing running averages of gradient and the squared hessian trace (default: (0.9, 0.999))</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="sd">    - eps (float, optional): term added to the denominator to improve numerical stability (default: 1e-8)</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="sd">    - weight_decay (float, optional): weight decay (L2 penalty) (default: 0.0)</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="sd">    - hessian_power (float, optional): exponent of the hessian trace (default: 1.0)</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="sd">    - update_each (int, optional): compute the hessian trace approximation only after *this* number of steps (to save time) (default: 1)</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="sd">    - n_samples (int, optional): how many times to sample `z` for the approximation of the hessian trace (default: 1)</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="sd">    Args:</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="sd">        params (iterable): iterable of parameters to optimize or dicts defining parameter groups</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="sd">        lr (float, optional): learning rate (default: 0.1)</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="sd">        betas ((float, float), optional): coefficients used for computing running averages of gradient and the squared hessian trace (default: (0.9, 0.999))</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a><span class="sd">        eps (float, optional): term added to the denominator to improve numerical stability (default: 1e-8)</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a><span class="sd">        weight_decay (float, optional): weight decay (L2 penalty) (default: 0.0)</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a><span class="sd">        hessian_power (float, optional): exponent of the hessian trace (default: 1.0)</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a><span class="sd">        update_each (int, optional): compute the hessian trace approximation only after *this* number of steps (to save time) (default: 1)</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a><span class="sd">        n_samples (int, optional): how many times to sample `z` for the approximation of the hessian trace (default: 1)</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>
 </span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">betas</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
@@ -134,7 +134,7 @@
 </span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">        Gets all parameters in all param_groups with gradients.</span>
 </span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>
 </span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">        Returns:</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">        - generator: a generator that produces all parameters with gradients</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">            generator: a generator that produces all parameters with gradients</span>
 </span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>
 </span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>        <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_groups</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">)</span>
@@ -179,8 +179,8 @@
 </span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a><span class="sd">        Performs a single optimization step.</span>
 </span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">        Parameters:</span>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="sd">        - closure (callable, optional): a closure that reevaluates the model and returns the loss (default: None)</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a><span class="sd">        Args:</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="sd">            closure (callable, optional): a closure that reevaluates the model and returns the loss (default: None)</span>
 </span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>
 </span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="n">loss</span> <span class="o">=</span> <span class="kc">None</span>
@@ -247,15 +247,15 @@
 </span><span id="AdaHessian-6"><a href="#AdaHessian-6"><span class="linenos">  6</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="AdaHessian-7"><a href="#AdaHessian-7"><span class="linenos">  7</span></a><span class="sd">    Implements the AdaHessian algorithm from &quot;ADAHESSIAN: An Adaptive Second OrderOptimizer for Machine Learning&quot;.</span>
 </span><span id="AdaHessian-8"><a href="#AdaHessian-8"><span class="linenos">  8</span></a>
-</span><span id="AdaHessian-9"><a href="#AdaHessian-9"><span class="linenos">  9</span></a><span class="sd">    Parameters:</span>
-</span><span id="AdaHessian-10"><a href="#AdaHessian-10"><span class="linenos"> 10</span></a><span class="sd">    - params (iterable): iterable of parameters to optimize or dicts defining parameter groups</span>
-</span><span id="AdaHessian-11"><a href="#AdaHessian-11"><span class="linenos"> 11</span></a><span class="sd">    - lr (float, optional): learning rate (default: 0.1)</span>
-</span><span id="AdaHessian-12"><a href="#AdaHessian-12"><span class="linenos"> 12</span></a><span class="sd">    - betas ((float, float), optional): coefficients used for computing running averages of gradient and the squared hessian trace (default: (0.9, 0.999))</span>
-</span><span id="AdaHessian-13"><a href="#AdaHessian-13"><span class="linenos"> 13</span></a><span class="sd">    - eps (float, optional): term added to the denominator to improve numerical stability (default: 1e-8)</span>
-</span><span id="AdaHessian-14"><a href="#AdaHessian-14"><span class="linenos"> 14</span></a><span class="sd">    - weight_decay (float, optional): weight decay (L2 penalty) (default: 0.0)</span>
-</span><span id="AdaHessian-15"><a href="#AdaHessian-15"><span class="linenos"> 15</span></a><span class="sd">    - hessian_power (float, optional): exponent of the hessian trace (default: 1.0)</span>
-</span><span id="AdaHessian-16"><a href="#AdaHessian-16"><span class="linenos"> 16</span></a><span class="sd">    - update_each (int, optional): compute the hessian trace approximation only after *this* number of steps (to save time) (default: 1)</span>
-</span><span id="AdaHessian-17"><a href="#AdaHessian-17"><span class="linenos"> 17</span></a><span class="sd">    - n_samples (int, optional): how many times to sample `z` for the approximation of the hessian trace (default: 1)</span>
+</span><span id="AdaHessian-9"><a href="#AdaHessian-9"><span class="linenos">  9</span></a><span class="sd">    Args:</span>
+</span><span id="AdaHessian-10"><a href="#AdaHessian-10"><span class="linenos"> 10</span></a><span class="sd">        params (iterable): iterable of parameters to optimize or dicts defining parameter groups</span>
+</span><span id="AdaHessian-11"><a href="#AdaHessian-11"><span class="linenos"> 11</span></a><span class="sd">        lr (float, optional): learning rate (default: 0.1)</span>
+</span><span id="AdaHessian-12"><a href="#AdaHessian-12"><span class="linenos"> 12</span></a><span class="sd">        betas ((float, float), optional): coefficients used for computing running averages of gradient and the squared hessian trace (default: (0.9, 0.999))</span>
+</span><span id="AdaHessian-13"><a href="#AdaHessian-13"><span class="linenos"> 13</span></a><span class="sd">        eps (float, optional): term added to the denominator to improve numerical stability (default: 1e-8)</span>
+</span><span id="AdaHessian-14"><a href="#AdaHessian-14"><span class="linenos"> 14</span></a><span class="sd">        weight_decay (float, optional): weight decay (L2 penalty) (default: 0.0)</span>
+</span><span id="AdaHessian-15"><a href="#AdaHessian-15"><span class="linenos"> 15</span></a><span class="sd">        hessian_power (float, optional): exponent of the hessian trace (default: 1.0)</span>
+</span><span id="AdaHessian-16"><a href="#AdaHessian-16"><span class="linenos"> 16</span></a><span class="sd">        update_each (int, optional): compute the hessian trace approximation only after *this* number of steps (to save time) (default: 1)</span>
+</span><span id="AdaHessian-17"><a href="#AdaHessian-17"><span class="linenos"> 17</span></a><span class="sd">        n_samples (int, optional): how many times to sample `z` for the approximation of the hessian trace (default: 1)</span>
 </span><span id="AdaHessian-18"><a href="#AdaHessian-18"><span class="linenos"> 18</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="AdaHessian-19"><a href="#AdaHessian-19"><span class="linenos"> 19</span></a>
 </span><span id="AdaHessian-20"><a href="#AdaHessian-20"><span class="linenos"> 20</span></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">betas</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> 
@@ -290,7 +290,7 @@
 </span><span id="AdaHessian-49"><a href="#AdaHessian-49"><span class="linenos"> 49</span></a><span class="sd">        Gets all parameters in all param_groups with gradients.</span>
 </span><span id="AdaHessian-50"><a href="#AdaHessian-50"><span class="linenos"> 50</span></a>
 </span><span id="AdaHessian-51"><a href="#AdaHessian-51"><span class="linenos"> 51</span></a><span class="sd">        Returns:</span>
-</span><span id="AdaHessian-52"><a href="#AdaHessian-52"><span class="linenos"> 52</span></a><span class="sd">        - generator: a generator that produces all parameters with gradients</span>
+</span><span id="AdaHessian-52"><a href="#AdaHessian-52"><span class="linenos"> 52</span></a><span class="sd">            generator: a generator that produces all parameters with gradients</span>
 </span><span id="AdaHessian-53"><a href="#AdaHessian-53"><span class="linenos"> 53</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="AdaHessian-54"><a href="#AdaHessian-54"><span class="linenos"> 54</span></a>
 </span><span id="AdaHessian-55"><a href="#AdaHessian-55"><span class="linenos"> 55</span></a>        <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_groups</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">)</span>
@@ -335,8 +335,8 @@
 </span><span id="AdaHessian-94"><a href="#AdaHessian-94"><span class="linenos"> 94</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="AdaHessian-95"><a href="#AdaHessian-95"><span class="linenos"> 95</span></a><span class="sd">        Performs a single optimization step.</span>
 </span><span id="AdaHessian-96"><a href="#AdaHessian-96"><span class="linenos"> 96</span></a>
-</span><span id="AdaHessian-97"><a href="#AdaHessian-97"><span class="linenos"> 97</span></a><span class="sd">        Parameters:</span>
-</span><span id="AdaHessian-98"><a href="#AdaHessian-98"><span class="linenos"> 98</span></a><span class="sd">        - closure (callable, optional): a closure that reevaluates the model and returns the loss (default: None)</span>
+</span><span id="AdaHessian-97"><a href="#AdaHessian-97"><span class="linenos"> 97</span></a><span class="sd">        Args:</span>
+</span><span id="AdaHessian-98"><a href="#AdaHessian-98"><span class="linenos"> 98</span></a><span class="sd">            closure (callable, optional): a closure that reevaluates the model and returns the loss (default: None)</span>
 </span><span id="AdaHessian-99"><a href="#AdaHessian-99"><span class="linenos"> 99</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="AdaHessian-100"><a href="#AdaHessian-100"><span class="linenos">100</span></a>
 </span><span id="AdaHessian-101"><a href="#AdaHessian-101"><span class="linenos">101</span></a>        <span class="n">loss</span> <span class="o">=</span> <span class="kc">None</span>
@@ -389,17 +389,17 @@
 
             <div class="docstring"><p>Implements the AdaHessian algorithm from "ADAHESSIAN: An Adaptive Second OrderOptimizer for Machine Learning".</p>
 
-<p>Parameters:</p>
+<h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li>params (iterable): iterable of parameters to optimize or dicts defining parameter groups</li>
-<li>lr (float, optional): learning rate (default: 0.1)</li>
-<li>betas ((float, float), optional): coefficients used for computing running averages of gradient and the squared hessian trace (default: (0.9, 0.999))</li>
-<li>eps (float, optional): term added to the denominator to improve numerical stability (default: 1e-8)</li>
-<li>weight_decay (float, optional): weight decay (L2 penalty) (default: 0.0)</li>
-<li>hessian_power (float, optional): exponent of the hessian trace (default: 1.0)</li>
-<li>update_each (int, optional): compute the hessian trace approximation only after <em>this</em> number of steps (to save time) (default: 1)</li>
-<li>n_samples (int, optional): how many times to sample <code>z</code> for the approximation of the hessian trace (default: 1)</li>
+<li><strong>params (iterable):</strong>  iterable of parameters to optimize or dicts defining parameter groups</li>
+<li><strong>lr (float, optional):</strong>  learning rate (default: 0.1)</li>
+<li><strong>betas ((float, float), optional):</strong>  coefficients used for computing running averages of gradient and the squared hessian trace (default: (0.9, 0.999))</li>
+<li><strong>eps (float, optional):</strong>  term added to the denominator to improve numerical stability (default: 1e-8)</li>
+<li><strong>weight_decay (float, optional):</strong>  weight decay (L2 penalty) (default: 0.0)</li>
+<li><strong>hessian_power (float, optional):</strong>  exponent of the hessian trace (default: 1.0)</li>
+<li><strong>update_each (int, optional):</strong>  compute the hessian trace approximation only after <em>this</em> number of steps (to save time) (default: 1)</li>
+<li><strong>n_samples (int, optional):</strong>  how many times to sample <code>z</code> for the approximation of the hessian trace (default: 1)</li>
 </ul>
 </div>
 
@@ -506,7 +506,7 @@
 </span><span id="AdaHessian.get_params-49"><a href="#AdaHessian.get_params-49"><span class="linenos">49</span></a><span class="sd">        Gets all parameters in all param_groups with gradients.</span>
 </span><span id="AdaHessian.get_params-50"><a href="#AdaHessian.get_params-50"><span class="linenos">50</span></a>
 </span><span id="AdaHessian.get_params-51"><a href="#AdaHessian.get_params-51"><span class="linenos">51</span></a><span class="sd">        Returns:</span>
-</span><span id="AdaHessian.get_params-52"><a href="#AdaHessian.get_params-52"><span class="linenos">52</span></a><span class="sd">        - generator: a generator that produces all parameters with gradients</span>
+</span><span id="AdaHessian.get_params-52"><a href="#AdaHessian.get_params-52"><span class="linenos">52</span></a><span class="sd">            generator: a generator that produces all parameters with gradients</span>
 </span><span id="AdaHessian.get_params-53"><a href="#AdaHessian.get_params-53"><span class="linenos">53</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="AdaHessian.get_params-54"><a href="#AdaHessian.get_params-54"><span class="linenos">54</span></a>
 </span><span id="AdaHessian.get_params-55"><a href="#AdaHessian.get_params-55"><span class="linenos">55</span></a>        <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_groups</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;params&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">)</span>
@@ -515,11 +515,11 @@
 
             <div class="docstring"><p>Gets all parameters in all param_groups with gradients.</p>
 
-<p>Returns:</p>
+<h6 id="returns">Returns:</h6>
 
-<ul>
-<li>generator: a generator that produces all parameters with gradients</li>
-</ul>
+<blockquote>
+  <p>generator: a generator that produces all parameters with gradients</p>
+</blockquote>
 </div>
 
 
@@ -613,8 +613,8 @@
 </span><span id="AdaHessian.step-94"><a href="#AdaHessian.step-94"><span class="linenos"> 94</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="AdaHessian.step-95"><a href="#AdaHessian.step-95"><span class="linenos"> 95</span></a><span class="sd">        Performs a single optimization step.</span>
 </span><span id="AdaHessian.step-96"><a href="#AdaHessian.step-96"><span class="linenos"> 96</span></a>
-</span><span id="AdaHessian.step-97"><a href="#AdaHessian.step-97"><span class="linenos"> 97</span></a><span class="sd">        Parameters:</span>
-</span><span id="AdaHessian.step-98"><a href="#AdaHessian.step-98"><span class="linenos"> 98</span></a><span class="sd">        - closure (callable, optional): a closure that reevaluates the model and returns the loss (default: None)</span>
+</span><span id="AdaHessian.step-97"><a href="#AdaHessian.step-97"><span class="linenos"> 97</span></a><span class="sd">        Args:</span>
+</span><span id="AdaHessian.step-98"><a href="#AdaHessian.step-98"><span class="linenos"> 98</span></a><span class="sd">            closure (callable, optional): a closure that reevaluates the model and returns the loss (default: None)</span>
 </span><span id="AdaHessian.step-99"><a href="#AdaHessian.step-99"><span class="linenos"> 99</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="AdaHessian.step-100"><a href="#AdaHessian.step-100"><span class="linenos">100</span></a>
 </span><span id="AdaHessian.step-101"><a href="#AdaHessian.step-101"><span class="linenos">101</span></a>        <span class="n">loss</span> <span class="o">=</span> <span class="kc">None</span>
@@ -667,10 +667,10 @@
 
             <div class="docstring"><p>Performs a single optimization step.</p>
 
-<p>Parameters:</p>
+<h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li>closure (callable, optional): a closure that reevaluates the model and returns the loss (default: None)</li>
+<li><strong>closure (callable, optional):</strong>  a closure that reevaluates the model and returns the loss (default: None)</li>
 </ul>
 </div>
 

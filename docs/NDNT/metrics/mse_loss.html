@@ -127,14 +127,14 @@
 </span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a><span class="sd">                2 &#39;av_batch_size&#39;: weight by average batch size. Needs av_batch_size set/initialized from dataset info</span>
 </span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a><span class="sd">                -1 &#39;unnormalized&#39;: no weighing at all. this will implicitly increase with batch size</span>
 </span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">        Parameters:</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">        - batch_weighting (int): 0, 1, 2, -1</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">        - unit_weighting (bool): whether to weight units</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">        - unit_weights (torch.tensor): weights for each unit</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">        - av_batch_size (int): average batch size</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a><span class="sd">        Args</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a><span class="sd">            batch_weighting (int): 0, 1, 2, -1</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a><span class="sd">            unit_weighting (bool): whether to weight units</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a><span class="sd">            unit_weights (torch.tensor): weights for each unit</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a><span class="sd">            av_batch_size (int): average batch size</span>
 </span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>
 </span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a><span class="sd">        Returns:</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">        - None</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a><span class="sd">            None</span>
 </span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>
 </span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -157,13 +157,13 @@
 </span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a><span class="sd">        This is the forward function for the loss function. It calculates the loss based on the input and target data.</span>
 </span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="sd">        The loss is calculated as the mean squared error between the prediction and target data.</span>
 </span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="sd">        Parameters:</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">        - pred (torch.tensor): prediction data</span>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="sd">        - target (torch.tensor): target data</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="sd">        - data_filters (torch.tensor): data filters for each unit</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a><span class="sd">        Args</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a><span class="sd">            pred (torch.tensor): prediction data</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a><span class="sd">            target (torch.tensor): target data</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a><span class="sd">            data_filters (torch.tensor): data filters for each unit</span>
 </span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>
 </span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a><span class="sd">        Returns:</span>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">        - loss (torch.tensor): loss value</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a><span class="sd">            loss (torch.tensor): loss value</span>
 </span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a><span class="sd">        &quot;&quot;&quot;</span> 
 </span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>        
 </span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="n">unit_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -195,14 +195,14 @@
 </span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="sd">        This should be equivalent of forward, without sum over units</span>
 </span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="sd">        Currently only true if batch_weighting = &#39;data_filter&#39;.</span>
 </span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a><span class="sd">        </span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="sd">        Parameters:</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="sd">        - pred (torch.tensor): prediction data</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="sd">        - target (torch.tensor): target data</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">        - data_filters (torch.tensor): data filters for each unit</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">        - temporal_normalize (bool): whether to normalize by time steps</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a><span class="sd">        Args</span>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a><span class="sd">            pred (torch.tensor): prediction data</span>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="sd">            target (torch.tensor): target data</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a><span class="sd">            data_filters (torch.tensor): data filters for each unit</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a><span class="sd">            temporal_normalize (bool): whether to normalize by time steps</span>
 </span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>
 </span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a><span class="sd">        Returns:</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">        - unitloss (torch.tensor): loss value</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a><span class="sd">            unitloss (torch.tensor): loss value</span>
 </span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>
 </span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>        <span class="k">if</span> <span class="n">data_filters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -277,14 +277,14 @@
 </span><span id="MseLoss_datafilter-42"><a href="#MseLoss_datafilter-42"><span class="linenos"> 42</span></a><span class="sd">                2 &#39;av_batch_size&#39;: weight by average batch size. Needs av_batch_size set/initialized from dataset info</span>
 </span><span id="MseLoss_datafilter-43"><a href="#MseLoss_datafilter-43"><span class="linenos"> 43</span></a><span class="sd">                -1 &#39;unnormalized&#39;: no weighing at all. this will implicitly increase with batch size</span>
 </span><span id="MseLoss_datafilter-44"><a href="#MseLoss_datafilter-44"><span class="linenos"> 44</span></a>
-</span><span id="MseLoss_datafilter-45"><a href="#MseLoss_datafilter-45"><span class="linenos"> 45</span></a><span class="sd">        Parameters:</span>
-</span><span id="MseLoss_datafilter-46"><a href="#MseLoss_datafilter-46"><span class="linenos"> 46</span></a><span class="sd">        - batch_weighting (int): 0, 1, 2, -1</span>
-</span><span id="MseLoss_datafilter-47"><a href="#MseLoss_datafilter-47"><span class="linenos"> 47</span></a><span class="sd">        - unit_weighting (bool): whether to weight units</span>
-</span><span id="MseLoss_datafilter-48"><a href="#MseLoss_datafilter-48"><span class="linenos"> 48</span></a><span class="sd">        - unit_weights (torch.tensor): weights for each unit</span>
-</span><span id="MseLoss_datafilter-49"><a href="#MseLoss_datafilter-49"><span class="linenos"> 49</span></a><span class="sd">        - av_batch_size (int): average batch size</span>
+</span><span id="MseLoss_datafilter-45"><a href="#MseLoss_datafilter-45"><span class="linenos"> 45</span></a><span class="sd">        Args</span>
+</span><span id="MseLoss_datafilter-46"><a href="#MseLoss_datafilter-46"><span class="linenos"> 46</span></a><span class="sd">            batch_weighting (int): 0, 1, 2, -1</span>
+</span><span id="MseLoss_datafilter-47"><a href="#MseLoss_datafilter-47"><span class="linenos"> 47</span></a><span class="sd">            unit_weighting (bool): whether to weight units</span>
+</span><span id="MseLoss_datafilter-48"><a href="#MseLoss_datafilter-48"><span class="linenos"> 48</span></a><span class="sd">            unit_weights (torch.tensor): weights for each unit</span>
+</span><span id="MseLoss_datafilter-49"><a href="#MseLoss_datafilter-49"><span class="linenos"> 49</span></a><span class="sd">            av_batch_size (int): average batch size</span>
 </span><span id="MseLoss_datafilter-50"><a href="#MseLoss_datafilter-50"><span class="linenos"> 50</span></a>
 </span><span id="MseLoss_datafilter-51"><a href="#MseLoss_datafilter-51"><span class="linenos"> 51</span></a><span class="sd">        Returns:</span>
-</span><span id="MseLoss_datafilter-52"><a href="#MseLoss_datafilter-52"><span class="linenos"> 52</span></a><span class="sd">        - None</span>
+</span><span id="MseLoss_datafilter-52"><a href="#MseLoss_datafilter-52"><span class="linenos"> 52</span></a><span class="sd">            None</span>
 </span><span id="MseLoss_datafilter-53"><a href="#MseLoss_datafilter-53"><span class="linenos"> 53</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="MseLoss_datafilter-54"><a href="#MseLoss_datafilter-54"><span class="linenos"> 54</span></a>
 </span><span id="MseLoss_datafilter-55"><a href="#MseLoss_datafilter-55"><span class="linenos"> 55</span></a>        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -307,13 +307,13 @@
 </span><span id="MseLoss_datafilter-72"><a href="#MseLoss_datafilter-72"><span class="linenos"> 72</span></a><span class="sd">        This is the forward function for the loss function. It calculates the loss based on the input and target data.</span>
 </span><span id="MseLoss_datafilter-73"><a href="#MseLoss_datafilter-73"><span class="linenos"> 73</span></a><span class="sd">        The loss is calculated as the mean squared error between the prediction and target data.</span>
 </span><span id="MseLoss_datafilter-74"><a href="#MseLoss_datafilter-74"><span class="linenos"> 74</span></a>
-</span><span id="MseLoss_datafilter-75"><a href="#MseLoss_datafilter-75"><span class="linenos"> 75</span></a><span class="sd">        Parameters:</span>
-</span><span id="MseLoss_datafilter-76"><a href="#MseLoss_datafilter-76"><span class="linenos"> 76</span></a><span class="sd">        - pred (torch.tensor): prediction data</span>
-</span><span id="MseLoss_datafilter-77"><a href="#MseLoss_datafilter-77"><span class="linenos"> 77</span></a><span class="sd">        - target (torch.tensor): target data</span>
-</span><span id="MseLoss_datafilter-78"><a href="#MseLoss_datafilter-78"><span class="linenos"> 78</span></a><span class="sd">        - data_filters (torch.tensor): data filters for each unit</span>
+</span><span id="MseLoss_datafilter-75"><a href="#MseLoss_datafilter-75"><span class="linenos"> 75</span></a><span class="sd">        Args</span>
+</span><span id="MseLoss_datafilter-76"><a href="#MseLoss_datafilter-76"><span class="linenos"> 76</span></a><span class="sd">            pred (torch.tensor): prediction data</span>
+</span><span id="MseLoss_datafilter-77"><a href="#MseLoss_datafilter-77"><span class="linenos"> 77</span></a><span class="sd">            target (torch.tensor): target data</span>
+</span><span id="MseLoss_datafilter-78"><a href="#MseLoss_datafilter-78"><span class="linenos"> 78</span></a><span class="sd">            data_filters (torch.tensor): data filters for each unit</span>
 </span><span id="MseLoss_datafilter-79"><a href="#MseLoss_datafilter-79"><span class="linenos"> 79</span></a>
 </span><span id="MseLoss_datafilter-80"><a href="#MseLoss_datafilter-80"><span class="linenos"> 80</span></a><span class="sd">        Returns:</span>
-</span><span id="MseLoss_datafilter-81"><a href="#MseLoss_datafilter-81"><span class="linenos"> 81</span></a><span class="sd">        - loss (torch.tensor): loss value</span>
+</span><span id="MseLoss_datafilter-81"><a href="#MseLoss_datafilter-81"><span class="linenos"> 81</span></a><span class="sd">            loss (torch.tensor): loss value</span>
 </span><span id="MseLoss_datafilter-82"><a href="#MseLoss_datafilter-82"><span class="linenos"> 82</span></a><span class="sd">        &quot;&quot;&quot;</span> 
 </span><span id="MseLoss_datafilter-83"><a href="#MseLoss_datafilter-83"><span class="linenos"> 83</span></a>        
 </span><span id="MseLoss_datafilter-84"><a href="#MseLoss_datafilter-84"><span class="linenos"> 84</span></a>        <span class="n">unit_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -345,14 +345,14 @@
 </span><span id="MseLoss_datafilter-110"><a href="#MseLoss_datafilter-110"><span class="linenos">110</span></a><span class="sd">        This should be equivalent of forward, without sum over units</span>
 </span><span id="MseLoss_datafilter-111"><a href="#MseLoss_datafilter-111"><span class="linenos">111</span></a><span class="sd">        Currently only true if batch_weighting = &#39;data_filter&#39;.</span>
 </span><span id="MseLoss_datafilter-112"><a href="#MseLoss_datafilter-112"><span class="linenos">112</span></a><span class="sd">        </span>
-</span><span id="MseLoss_datafilter-113"><a href="#MseLoss_datafilter-113"><span class="linenos">113</span></a><span class="sd">        Parameters:</span>
-</span><span id="MseLoss_datafilter-114"><a href="#MseLoss_datafilter-114"><span class="linenos">114</span></a><span class="sd">        - pred (torch.tensor): prediction data</span>
-</span><span id="MseLoss_datafilter-115"><a href="#MseLoss_datafilter-115"><span class="linenos">115</span></a><span class="sd">        - target (torch.tensor): target data</span>
-</span><span id="MseLoss_datafilter-116"><a href="#MseLoss_datafilter-116"><span class="linenos">116</span></a><span class="sd">        - data_filters (torch.tensor): data filters for each unit</span>
-</span><span id="MseLoss_datafilter-117"><a href="#MseLoss_datafilter-117"><span class="linenos">117</span></a><span class="sd">        - temporal_normalize (bool): whether to normalize by time steps</span>
+</span><span id="MseLoss_datafilter-113"><a href="#MseLoss_datafilter-113"><span class="linenos">113</span></a><span class="sd">        Args</span>
+</span><span id="MseLoss_datafilter-114"><a href="#MseLoss_datafilter-114"><span class="linenos">114</span></a><span class="sd">            pred (torch.tensor): prediction data</span>
+</span><span id="MseLoss_datafilter-115"><a href="#MseLoss_datafilter-115"><span class="linenos">115</span></a><span class="sd">            target (torch.tensor): target data</span>
+</span><span id="MseLoss_datafilter-116"><a href="#MseLoss_datafilter-116"><span class="linenos">116</span></a><span class="sd">            data_filters (torch.tensor): data filters for each unit</span>
+</span><span id="MseLoss_datafilter-117"><a href="#MseLoss_datafilter-117"><span class="linenos">117</span></a><span class="sd">            temporal_normalize (bool): whether to normalize by time steps</span>
 </span><span id="MseLoss_datafilter-118"><a href="#MseLoss_datafilter-118"><span class="linenos">118</span></a>
 </span><span id="MseLoss_datafilter-119"><a href="#MseLoss_datafilter-119"><span class="linenos">119</span></a><span class="sd">        Returns:</span>
-</span><span id="MseLoss_datafilter-120"><a href="#MseLoss_datafilter-120"><span class="linenos">120</span></a><span class="sd">        - unitloss (torch.tensor): loss value</span>
+</span><span id="MseLoss_datafilter-120"><a href="#MseLoss_datafilter-120"><span class="linenos">120</span></a><span class="sd">            unitloss (torch.tensor): loss value</span>
 </span><span id="MseLoss_datafilter-121"><a href="#MseLoss_datafilter-121"><span class="linenos">121</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="MseLoss_datafilter-122"><a href="#MseLoss_datafilter-122"><span class="linenos">122</span></a>
 </span><span id="MseLoss_datafilter-123"><a href="#MseLoss_datafilter-123"><span class="linenos">123</span></a>        <span class="k">if</span> <span class="n">data_filters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -491,14 +491,14 @@ Note that default is using batch_size, and info must be oassed in using 'set_los
 </span><span id="MseLoss_datafilter.set_loss_weighting-42"><a href="#MseLoss_datafilter.set_loss_weighting-42"><span class="linenos">42</span></a><span class="sd">                2 &#39;av_batch_size&#39;: weight by average batch size. Needs av_batch_size set/initialized from dataset info</span>
 </span><span id="MseLoss_datafilter.set_loss_weighting-43"><a href="#MseLoss_datafilter.set_loss_weighting-43"><span class="linenos">43</span></a><span class="sd">                -1 &#39;unnormalized&#39;: no weighing at all. this will implicitly increase with batch size</span>
 </span><span id="MseLoss_datafilter.set_loss_weighting-44"><a href="#MseLoss_datafilter.set_loss_weighting-44"><span class="linenos">44</span></a>
-</span><span id="MseLoss_datafilter.set_loss_weighting-45"><a href="#MseLoss_datafilter.set_loss_weighting-45"><span class="linenos">45</span></a><span class="sd">        Parameters:</span>
-</span><span id="MseLoss_datafilter.set_loss_weighting-46"><a href="#MseLoss_datafilter.set_loss_weighting-46"><span class="linenos">46</span></a><span class="sd">        - batch_weighting (int): 0, 1, 2, -1</span>
-</span><span id="MseLoss_datafilter.set_loss_weighting-47"><a href="#MseLoss_datafilter.set_loss_weighting-47"><span class="linenos">47</span></a><span class="sd">        - unit_weighting (bool): whether to weight units</span>
-</span><span id="MseLoss_datafilter.set_loss_weighting-48"><a href="#MseLoss_datafilter.set_loss_weighting-48"><span class="linenos">48</span></a><span class="sd">        - unit_weights (torch.tensor): weights for each unit</span>
-</span><span id="MseLoss_datafilter.set_loss_weighting-49"><a href="#MseLoss_datafilter.set_loss_weighting-49"><span class="linenos">49</span></a><span class="sd">        - av_batch_size (int): average batch size</span>
+</span><span id="MseLoss_datafilter.set_loss_weighting-45"><a href="#MseLoss_datafilter.set_loss_weighting-45"><span class="linenos">45</span></a><span class="sd">        Args</span>
+</span><span id="MseLoss_datafilter.set_loss_weighting-46"><a href="#MseLoss_datafilter.set_loss_weighting-46"><span class="linenos">46</span></a><span class="sd">            batch_weighting (int): 0, 1, 2, -1</span>
+</span><span id="MseLoss_datafilter.set_loss_weighting-47"><a href="#MseLoss_datafilter.set_loss_weighting-47"><span class="linenos">47</span></a><span class="sd">            unit_weighting (bool): whether to weight units</span>
+</span><span id="MseLoss_datafilter.set_loss_weighting-48"><a href="#MseLoss_datafilter.set_loss_weighting-48"><span class="linenos">48</span></a><span class="sd">            unit_weights (torch.tensor): weights for each unit</span>
+</span><span id="MseLoss_datafilter.set_loss_weighting-49"><a href="#MseLoss_datafilter.set_loss_weighting-49"><span class="linenos">49</span></a><span class="sd">            av_batch_size (int): average batch size</span>
 </span><span id="MseLoss_datafilter.set_loss_weighting-50"><a href="#MseLoss_datafilter.set_loss_weighting-50"><span class="linenos">50</span></a>
 </span><span id="MseLoss_datafilter.set_loss_weighting-51"><a href="#MseLoss_datafilter.set_loss_weighting-51"><span class="linenos">51</span></a><span class="sd">        Returns:</span>
-</span><span id="MseLoss_datafilter.set_loss_weighting-52"><a href="#MseLoss_datafilter.set_loss_weighting-52"><span class="linenos">52</span></a><span class="sd">        - None</span>
+</span><span id="MseLoss_datafilter.set_loss_weighting-52"><a href="#MseLoss_datafilter.set_loss_weighting-52"><span class="linenos">52</span></a><span class="sd">            None</span>
 </span><span id="MseLoss_datafilter.set_loss_weighting-53"><a href="#MseLoss_datafilter.set_loss_weighting-53"><span class="linenos">53</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="MseLoss_datafilter.set_loss_weighting-54"><a href="#MseLoss_datafilter.set_loss_weighting-54"><span class="linenos">54</span></a>
 </span><span id="MseLoss_datafilter.set_loss_weighting-55"><a href="#MseLoss_datafilter.set_loss_weighting-55"><span class="linenos">55</span></a>        <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -529,20 +529,17 @@ Note that default is using batch_size, and info must be oassed in using 'set_los
       -1 'unnormalized': no weighing at all. this will implicitly increase with batch size</p>
 </blockquote>
 
-<p>Parameters:</p>
+<p>Args
+    batch_weighting (int): 0, 1, 2, -1
+    unit_weighting (bool): whether to weight units
+    unit_weights (torch.tensor): weights for each unit
+    av_batch_size (int): average batch size</p>
 
-<ul>
-<li>batch_weighting (int): 0, 1, 2, -1</li>
-<li>unit_weighting (bool): whether to weight units</li>
-<li>unit_weights (torch.tensor): weights for each unit</li>
-<li>av_batch_size (int): average batch size</li>
-</ul>
+<h6 id="returns">Returns:</h6>
 
-<p>Returns:</p>
-
-<ul>
-<li>None</li>
-</ul>
+<blockquote>
+  <p>None</p>
+</blockquote>
 </div>
 
 
@@ -563,13 +560,13 @@ Note that default is using batch_size, and info must be oassed in using 'set_los
 </span><span id="MseLoss_datafilter.forward-72"><a href="#MseLoss_datafilter.forward-72"><span class="linenos"> 72</span></a><span class="sd">        This is the forward function for the loss function. It calculates the loss based on the input and target data.</span>
 </span><span id="MseLoss_datafilter.forward-73"><a href="#MseLoss_datafilter.forward-73"><span class="linenos"> 73</span></a><span class="sd">        The loss is calculated as the mean squared error between the prediction and target data.</span>
 </span><span id="MseLoss_datafilter.forward-74"><a href="#MseLoss_datafilter.forward-74"><span class="linenos"> 74</span></a>
-</span><span id="MseLoss_datafilter.forward-75"><a href="#MseLoss_datafilter.forward-75"><span class="linenos"> 75</span></a><span class="sd">        Parameters:</span>
-</span><span id="MseLoss_datafilter.forward-76"><a href="#MseLoss_datafilter.forward-76"><span class="linenos"> 76</span></a><span class="sd">        - pred (torch.tensor): prediction data</span>
-</span><span id="MseLoss_datafilter.forward-77"><a href="#MseLoss_datafilter.forward-77"><span class="linenos"> 77</span></a><span class="sd">        - target (torch.tensor): target data</span>
-</span><span id="MseLoss_datafilter.forward-78"><a href="#MseLoss_datafilter.forward-78"><span class="linenos"> 78</span></a><span class="sd">        - data_filters (torch.tensor): data filters for each unit</span>
+</span><span id="MseLoss_datafilter.forward-75"><a href="#MseLoss_datafilter.forward-75"><span class="linenos"> 75</span></a><span class="sd">        Args</span>
+</span><span id="MseLoss_datafilter.forward-76"><a href="#MseLoss_datafilter.forward-76"><span class="linenos"> 76</span></a><span class="sd">            pred (torch.tensor): prediction data</span>
+</span><span id="MseLoss_datafilter.forward-77"><a href="#MseLoss_datafilter.forward-77"><span class="linenos"> 77</span></a><span class="sd">            target (torch.tensor): target data</span>
+</span><span id="MseLoss_datafilter.forward-78"><a href="#MseLoss_datafilter.forward-78"><span class="linenos"> 78</span></a><span class="sd">            data_filters (torch.tensor): data filters for each unit</span>
 </span><span id="MseLoss_datafilter.forward-79"><a href="#MseLoss_datafilter.forward-79"><span class="linenos"> 79</span></a>
 </span><span id="MseLoss_datafilter.forward-80"><a href="#MseLoss_datafilter.forward-80"><span class="linenos"> 80</span></a><span class="sd">        Returns:</span>
-</span><span id="MseLoss_datafilter.forward-81"><a href="#MseLoss_datafilter.forward-81"><span class="linenos"> 81</span></a><span class="sd">        - loss (torch.tensor): loss value</span>
+</span><span id="MseLoss_datafilter.forward-81"><a href="#MseLoss_datafilter.forward-81"><span class="linenos"> 81</span></a><span class="sd">            loss (torch.tensor): loss value</span>
 </span><span id="MseLoss_datafilter.forward-82"><a href="#MseLoss_datafilter.forward-82"><span class="linenos"> 82</span></a><span class="sd">        &quot;&quot;&quot;</span> 
 </span><span id="MseLoss_datafilter.forward-83"><a href="#MseLoss_datafilter.forward-83"><span class="linenos"> 83</span></a>        
 </span><span id="MseLoss_datafilter.forward-84"><a href="#MseLoss_datafilter.forward-84"><span class="linenos"> 84</span></a>        <span class="n">unit_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span> <span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">device</span><span class="o">=</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
@@ -600,19 +597,16 @@ Note that default is using batch_size, and info must be oassed in using 'set_los
             <div class="docstring"><p>This is the forward function for the loss function. It calculates the loss based on the input and target data.
 The loss is calculated as the mean squared error between the prediction and target data.</p>
 
-<p>Parameters:</p>
+<p>Args
+    pred (torch.tensor): prediction data
+    target (torch.tensor): target data
+    data_filters (torch.tensor): data filters for each unit</p>
 
-<ul>
-<li>pred (torch.tensor): prediction data</li>
-<li>target (torch.tensor): target data</li>
-<li>data_filters (torch.tensor): data filters for each unit</li>
-</ul>
+<h6 id="returns">Returns:</h6>
 
-<p>Returns:</p>
-
-<ul>
-<li>loss (torch.tensor): loss value</li>
-</ul>
+<blockquote>
+  <p>loss (torch.tensor): loss value</p>
+</blockquote>
 </div>
 
 
@@ -633,14 +627,14 @@ The loss is calculated as the mean squared error between the prediction and targ
 </span><span id="MseLoss_datafilter.unit_loss-110"><a href="#MseLoss_datafilter.unit_loss-110"><span class="linenos">110</span></a><span class="sd">        This should be equivalent of forward, without sum over units</span>
 </span><span id="MseLoss_datafilter.unit_loss-111"><a href="#MseLoss_datafilter.unit_loss-111"><span class="linenos">111</span></a><span class="sd">        Currently only true if batch_weighting = &#39;data_filter&#39;.</span>
 </span><span id="MseLoss_datafilter.unit_loss-112"><a href="#MseLoss_datafilter.unit_loss-112"><span class="linenos">112</span></a><span class="sd">        </span>
-</span><span id="MseLoss_datafilter.unit_loss-113"><a href="#MseLoss_datafilter.unit_loss-113"><span class="linenos">113</span></a><span class="sd">        Parameters:</span>
-</span><span id="MseLoss_datafilter.unit_loss-114"><a href="#MseLoss_datafilter.unit_loss-114"><span class="linenos">114</span></a><span class="sd">        - pred (torch.tensor): prediction data</span>
-</span><span id="MseLoss_datafilter.unit_loss-115"><a href="#MseLoss_datafilter.unit_loss-115"><span class="linenos">115</span></a><span class="sd">        - target (torch.tensor): target data</span>
-</span><span id="MseLoss_datafilter.unit_loss-116"><a href="#MseLoss_datafilter.unit_loss-116"><span class="linenos">116</span></a><span class="sd">        - data_filters (torch.tensor): data filters for each unit</span>
-</span><span id="MseLoss_datafilter.unit_loss-117"><a href="#MseLoss_datafilter.unit_loss-117"><span class="linenos">117</span></a><span class="sd">        - temporal_normalize (bool): whether to normalize by time steps</span>
+</span><span id="MseLoss_datafilter.unit_loss-113"><a href="#MseLoss_datafilter.unit_loss-113"><span class="linenos">113</span></a><span class="sd">        Args</span>
+</span><span id="MseLoss_datafilter.unit_loss-114"><a href="#MseLoss_datafilter.unit_loss-114"><span class="linenos">114</span></a><span class="sd">            pred (torch.tensor): prediction data</span>
+</span><span id="MseLoss_datafilter.unit_loss-115"><a href="#MseLoss_datafilter.unit_loss-115"><span class="linenos">115</span></a><span class="sd">            target (torch.tensor): target data</span>
+</span><span id="MseLoss_datafilter.unit_loss-116"><a href="#MseLoss_datafilter.unit_loss-116"><span class="linenos">116</span></a><span class="sd">            data_filters (torch.tensor): data filters for each unit</span>
+</span><span id="MseLoss_datafilter.unit_loss-117"><a href="#MseLoss_datafilter.unit_loss-117"><span class="linenos">117</span></a><span class="sd">            temporal_normalize (bool): whether to normalize by time steps</span>
 </span><span id="MseLoss_datafilter.unit_loss-118"><a href="#MseLoss_datafilter.unit_loss-118"><span class="linenos">118</span></a>
 </span><span id="MseLoss_datafilter.unit_loss-119"><a href="#MseLoss_datafilter.unit_loss-119"><span class="linenos">119</span></a><span class="sd">        Returns:</span>
-</span><span id="MseLoss_datafilter.unit_loss-120"><a href="#MseLoss_datafilter.unit_loss-120"><span class="linenos">120</span></a><span class="sd">        - unitloss (torch.tensor): loss value</span>
+</span><span id="MseLoss_datafilter.unit_loss-120"><a href="#MseLoss_datafilter.unit_loss-120"><span class="linenos">120</span></a><span class="sd">            unitloss (torch.tensor): loss value</span>
 </span><span id="MseLoss_datafilter.unit_loss-121"><a href="#MseLoss_datafilter.unit_loss-121"><span class="linenos">121</span></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="MseLoss_datafilter.unit_loss-122"><a href="#MseLoss_datafilter.unit_loss-122"><span class="linenos">122</span></a>
 </span><span id="MseLoss_datafilter.unit_loss-123"><a href="#MseLoss_datafilter.unit_loss-123"><span class="linenos">123</span></a>        <span class="k">if</span> <span class="n">data_filters</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -666,20 +660,17 @@ The loss is calculated as the mean squared error between the prediction and targ
             <div class="docstring"><p>This should be equivalent of forward, without sum over units
 Currently only true if batch_weighting = 'data_filter'.</p>
 
-<p>Parameters:</p>
+<p>Args
+    pred (torch.tensor): prediction data
+    target (torch.tensor): target data
+    data_filters (torch.tensor): data filters for each unit
+    temporal_normalize (bool): whether to normalize by time steps</p>
 
-<ul>
-<li>pred (torch.tensor): prediction data</li>
-<li>target (torch.tensor): target data</li>
-<li>data_filters (torch.tensor): data filters for each unit</li>
-<li>temporal_normalize (bool): whether to normalize by time steps</li>
-</ul>
+<h6 id="returns">Returns:</h6>
 
-<p>Returns:</p>
-
-<ul>
-<li>unitloss (torch.tensor): loss value</li>
-</ul>
+<blockquote>
+  <p>unitloss (torch.tensor): loss value</p>
+</blockquote>
 </div>
 
 

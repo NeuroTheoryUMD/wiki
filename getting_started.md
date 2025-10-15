@@ -1,28 +1,37 @@
 # Getting Started on Linux
 
 ## Install Package manager
-1a. If you have root access, you can go to https://www.anaconda.com/ and download and install the mini-anaconda directly.
-1b. Much easier: you can install a pre-downloaded anaconda package manager and then run it without root access (accomplishes same thing). If there is not already one in your home directory, there will probably be one in /home/dab/
-	A. Either way, run the installer with ```./<INSTALLER>``` and continue with all default options. [Note the installer file will have to have 'executable' permissions to do this.]
-	B. To be able to use conda in the next step, either run ```source ~/.bashrc``` or logout and login.
-2. Setup PyTorch environment, run the following commands:
-	1. ```conda create --name torch```
-	2. ```conda activate torch```
-3. Install and verify the installation of pytorch.
-	1. pytorch now prefers being installed by pip, apparently. So first install pip by running ```conda install pip```
-	2. Install pytorch: ```pip install torch torchvision```
-	3. Verify it is installed correctly by typing the following and it should print ```True```.
+<ol>
+<li>If you have root access, you can go to https://www.anaconda.com/ and download and install the mini-anaconda directly.</li>
+<li>Much easier: you can install a pre-downloaded anaconda package manager and then run it without root access (accomplishes same thing). If there is not already one in your home directory, there will probably be one in /home/dab/
+	<ol>
+	<li>Either way, run the installer with ```./[INSTALLER]``` and continue with all default options. [Note the installer file will have to have 'executable' permissions to do this.]
+	<li>To be able to use conda in the next step, either run ```source ~/.bashrc``` or logout and login.
+	</ol></li>
+<li>Setup PyTorch environment, run the following commands:<ol>
+	<li>```conda create --name torch```</li>
+	<li>```conda activate torch```</li></ol>	
+</li>
+<li>Install and verify the installation of pytorch.
+	<ol>
+	<li>pytorch now prefers being installed by pip, apparently. So first install pip by running ```conda install pip```
+	<li>Install pytorch: ```pip install torch torchvision```
+	<li>Verify it is installed correctly by typing the following and it should print ```True```.<br>
     	```
      	python
         import torch
      	torch.cuda.is_available()
      	quit()
 		```
-4. Install dependencies
-	1. ```conda install matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy jupyter scikit-image```
- 	2. (Optional: for faster package finding, install ```conda install conda-libmamba-solver```, then set it as your solver ```conda config --set solver libmamba```.)
-	3. (Optional: to install ```optuna``` for hyperparameter optimization, install it via the conda-forge channel ```conda install -c conda-forge optuna```.)
-5. Setup a password for jupyter notebook. Type ```jupyter notebook password```. Enter your desired password.
+	</li></ol>
+<li>Install dependencies
+	<ol>
+	<li>```conda install matplotlib h5py scikit-learn dill scipy seaborn tensorboard tqdm numpy jupyter scikit-image```</li>
+ 	<li>(Optional: for faster package finding, install ```conda install conda-libmamba-solver```, then set it as your solver ```conda config --set solver libmamba```.)
+	<li>(Optional: to install ```optuna``` for hyperparameter optimization, install it via the conda-forge channel ```conda install -c conda-forge optuna```.)
+	</li></ol>
+<li>Setup a password for jupyter notebook. Type ```jupyter notebook password```. Enter your desired password.
+</ol>
 
 ## Setup git permissions
 (https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?platform=linux)
